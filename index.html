@@ -140,6 +140,13 @@
             box-shadow: 0px 0px 20px 4px #008CFF;
         }
 
+        /* New styles for the working on text */
+        .working-on-text {
+            margin-top: 20px;
+            font-size: 16px;
+            color: gray;
+        }
+
         .snow-container {
             position: absolute;
             top: 0;
@@ -197,6 +204,7 @@
             <span class="blue">ZONE</span>
         </div>
         <input type="text" id="customSearchBar" class="custom-search-bar" placeholder="Search...">
+        <p class="working-on-text">The website is still being worked on...</p>
     </div>
 
     <!-- Snow container -->
@@ -208,7 +216,7 @@
             if (event.key === 'Enter') {
                 const baseUrl = 'https://wxstbound.global.ssl.fastly.net/embed.html#https://www.google.com/search?q=';
                 const query = encodeURIComponent(searchBar.value.trim());
-                window.location.href = ${baseUrl}${query};
+                window.location.href = `${baseUrl}${query}`;
             }
         });
 
