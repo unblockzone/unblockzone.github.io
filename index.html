@@ -140,13 +140,6 @@
             box-shadow: 0px 0px 20px 4px #008CFF;
         }
 
-        /* New styles for the working on text */
-        .working-on-text {
-            margin-top: 20px;
-            font-size: 16px;
-            color: gray;
-        }
-
         /* Background with floating blue dots */
         .background {
             position: absolute;
@@ -165,21 +158,23 @@
             height: 10px;
             background-color: blue;
             border-radius: 50%;
-            animation: float 4s infinite linear;
-            opacity: 0.7;
+            animation: float 10s infinite;
+            opacity: 0;
         }
 
         @keyframes float {
             0% {
-                transform: translateY(0) scale(1);
-                opacity: 0.7;
+                transform: translateY(100vh) scale(0.5);
+                opacity: 0;
             }
-            50% {
-                transform: translateY(-50vh) scale(1.2);
+            20% {
+                opacity: 1;
+            }
+            80% {
                 opacity: 1;
             }
             100% {
-                transform: translateY(-100vh) scale(0.8);
+                transform: translateY(-10vh) scale(1);
                 opacity: 0;
             }
         }
@@ -207,7 +202,6 @@
             <span class="blue">ZONE</span>
         </div>
         <input type="text" id="customSearchBar" class="custom-search-bar" placeholder="Search...">
-        <p class="working-on-text">The website is still being worked on...</p>
     </div>
 
     <!-- Background with floating blue dots -->
@@ -230,8 +224,7 @@
             const dot = document.createElement('div');
             dot.classList.add('dot');
             dot.style.left = Math.random() * 100 + '%';
-            dot.style.bottom = '-' + Math.random() * 10 + 'px';
-            dot.style.animationDuration = Math.random() * 3 + 2 + 's';
+            dot.style.animationDuration = Math.random() * 8 + 3 + 's';
             dot.style.animationDelay = Math.random() * 2 + 's';
             background.appendChild(dot);
 
