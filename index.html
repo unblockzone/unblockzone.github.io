@@ -147,38 +147,41 @@
             color: gray;
         }
 
-        .snow-container {
+        /* Background with floating blue dots */
+        .background {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
-            z-index: 5;
+            background-color: black;
+            overflow: hidden;
+            z-index: -1;
         }
 
-        .snowflake, .snow {
+        .dot {
             position: absolute;
-            top: -10px;
-            opacity: 0.8;
-            animation: fall 10s linear infinite;
-        }
-
-        .snowflake {
-            font-size: 15px;
-            color: white;
-        }
-
-        .snow {
-            width: 5px;
-            height: 5px;
-            background-color: white;
+            width: 10px;
+            height: 10px;
+            background-color: blue;
             border-radius: 50%;
+            animation: float 10s infinite;
+            opacity: 0.7;
         }
 
-        @keyframes fall {
-            0% { transform: translateY(-10px); }
-            100% { transform: translateY(110vh); }
+        @keyframes float {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translateY(-50vh) scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) scale(0.8);
+                opacity: 0;
+            }
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Roboto:wght@700&display=swap" rel="stylesheet">
@@ -207,8 +210,8 @@
         <p class="working-on-text">The website is still being worked on...</p>
     </div>
 
-    <!-- Snow container -->
-    <div class="snow-container" id="snowContainer"></div>
+    <!-- Background with floating blue dots -->
+    <div class="background" id="background"></div>
 
     <script>
         const searchBar = document.getElementById('customSearchBar');
@@ -220,39 +223,30 @@
             }
         });
 
-        // Snow effect generator
-        const snowContainer = document.getElementById('snowContainer');
+        // Generate floating blue dots
+        const background = document.getElementById('background');
 
-        function createSnowflake() {
-            const snowflake = document.createElement('div');
-            snowflake.classList.add('snowflake');
-            snowflake.textContent = '❄';
-            snowflake.style.left = Math.random() * 100 + '%';
-            snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
-            snowflake.style.animationDelay = Math.random() * 10 + 's';
-            snowContainer.appendChild(snowflake);
+        function createDot() {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            dot.style.left = Math.random() * 100 + '%';
+            dot.style.bottom = '-' + Math.random() * 20 + 'px';
+            dot.style.animationDuration = Math.random() * 10 + 5 + 's';
+            dot.style.animationDelay = Math.random() * 5 + 's';
+            background.appendChild(dot);
 
-            snowflake.addEventListener('animationend', () => {
-                snowflake.remove();
+            dot.addEventListener('animationend', () => {
+                dot.remove();
             });
         }
 
-        function createSnow() {
-            const snow = document.createElement('div');
-            snow.classList.add('snow');
-            snow.style.left = Math.random() * 100 + '%';
-            snow.style.animationDelay = Math.random() * 10 + 's';
-            snowContainer.appendChild(snow);
-
-            snow.addEventListener('animationend', () => {
-                snow.remove();
-            });
+        for (let i = 0; i < 100; i++) {
+            createDot();
         }
 
-        for (let i = 0; i < 50; i++) {
-            createSnowflake();
-            createSnow();
-        }
+        setInterval(() => {
+            createDot();
+        }, 1000);
     </script>
 </body>
 </html>
