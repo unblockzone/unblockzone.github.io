@@ -9,25 +9,22 @@
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/61/61457.png" type="image/x-icon">
 
     <style>
-        @font-face {
-            font-family: 'Bowlby One';
-            src: url('https://fonts.gstatic.com/s/bowlbyone/v13/nwpRtKu3QIswDQpbfkxHO6E.ttf') format('truetype');
-        }
-
+        /* Prevent horizontal and vertical scrolling */
         html, body {
             margin: 0;
             padding: 0;
             height: 100%;
-            background-color: black;
-            font-family: 'Bowlby One', sans-serif;
-            color: white;
-            overflow-x: hidden;
+            overflow: hidden;
         }
 
         body {
+            background-color: black;
+            font-family: 'Bowlby One', sans-serif;
+            color: white;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            text-align: center;
+            position: relative;
         }
 
         header {
@@ -38,15 +35,15 @@
             padding: 10px 20px;
             position: sticky;
             top: 0;
-            width: 100%;
             z-index: 10;
         }
 
         h1 {
-            font-size: 40px;
+            font-size: 50px;
             margin: 0;
-            cursor: pointer;
+            display: inline-block;
             transition: transform 0.3s ease;
+            cursor: pointer;
         }
 
         h1:hover {
@@ -74,11 +71,12 @@
             font-size: 18px;
             text-decoration: none;
             text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .nav-button:hover {
             transform: scale(1.1);
+            background-color: black;
             box-shadow: 0px 0px 15px 4px #008CFF;
             color: #008CFF;
         }
@@ -87,44 +85,62 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            cursor: pointer;
             transition: transform 0.3s ease;
+            cursor: pointer;
         }
 
         .logo:hover {
             transform: scale(1.2);
         }
 
-        .developer-notes {
-            background-color: #001f3f; /* Dark blue */
-            border-radius: 20px;
+        .subtitle-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             padding: 20px;
-            margin: 50px 0;
-            width: 90%;
-            max-width: 600px;
-            box-shadow: 0 0 20px rgba(0, 140, 255, 0.5); /* Blue glow */
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .subtitle {
+            font-size: 80px;
+            display: inline-block;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .subtitle .blue {
+            color: blue;
+            font-size: 100px;
+            display: block;
+        }
+
+        .subtitle:hover {
+            transform: scale(1.1);
+        }
+
+        .custom-search-bar {
+            font-size: 18px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 30px;
+            width: 50%;
+            background-color: #555;
+            color: white;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .developer-notes:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(0, 140, 255, 0.8); /* Brighter blue glow on hover */
+        .custom-search-bar:focus {
+            outline: none;
         }
 
-        .developer-notes h2 {
-            font-size: 30px;
-            margin: 0;
-            font-weight: bold;
-            color: white;
+        .custom-search-bar:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 0px 20px 4px #008CFF;
         }
 
-        .developer-notes p {
-            font-size: 18px;
-            margin-top: 10px;
-            font-weight: normal;
-            color: #cccccc; /* Light gray for better readability */
-        }
-
+        /* Background with floating blue dots */
         .background {
             position: absolute;
             top: 0;
@@ -136,7 +152,34 @@
             z-index: -1;
         }
 
+        .dot {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: blue;
+            border-radius: 50%;
+            animation: float 10s infinite;
+            opacity: 0;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) scale(0.5);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1);
+                opacity: 0;
+            }
+        }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Roboto:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -153,9 +196,50 @@
         <img src="https://cdn-icons-png.flaticon.com/512/61/61457.png" alt="Logo" class="logo" onclick="window.location.href='https://unblockzone.github.io/'">
     </header>
 
-    <div class="developer-notes">
-        <h2>Developer Notes</h2>
-        <p>We are currently fixing the Google Situation and still trying our best to make this Website. Please note this Website is STILL being worked on. We are currently fixing the Search Problem.</p>
+    <div class="subtitle-container">
+        <div class="subtitle">
+            <span class="white">UNBLOCK</span>
+            <span class="blue">ZONE</span>
+        </div>
+        <input type="text" id="customSearchBar" class="custom-search-bar" placeholder="Search...">
     </div>
+
+    <!-- Background with floating blue dots -->
+    <div class="background" id="background"></div>
+
+    <script>
+        const searchBar = document.getElementById('customSearchBar');
+        searchBar.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                const baseUrl = 'https://wxstbound.global.ssl.fastly.net/embed.html#https://www.google.com/search?q=';
+                const query = encodeURIComponent(searchBar.value.trim());
+                window.location.href = `${baseUrl}${query}`;
+            }
+        });
+
+        // Generate floating blue dots
+        const background = document.getElementById('background');
+
+        function createDot() {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            dot.style.left = Math.random() * 100 + '%';
+            dot.style.animationDuration = Math.random() * 8 + 3 + 's';
+            dot.style.animationDelay = Math.random() * 2 + 's';
+            background.appendChild(dot);
+
+            dot.addEventListener('animationend', () => {
+                dot.remove();
+            });
+        }
+
+        for (let i = 0; i < 100; i++) {
+            createDot();
+        }
+
+        setInterval(() => {
+            createDot();
+        }, 500);
+    </script>
 </body>
 </html>
