@@ -36,7 +36,7 @@
             position: sticky;
             top: 0;
             z-index: 10;
-            gap: 20px; /* Add space between the elements */
+            gap: 15px; /* Space between elements */
         }
 
         h1 {
@@ -61,8 +61,8 @@
 
         .nav-buttons {
             display: flex;
-            gap: 20px;
-            margin-left: 40px; /* Shift buttons away from the title */
+            gap: 10px; /* Reduced spacing between buttons */
+            margin-left: 20px; /* Bring the buttons closer to the left */
         }
 
         .nav-button {
@@ -142,6 +142,45 @@
             transform: scale(1.1);
             box-shadow: 0px 0px 20px 4px #008CFF;
         }
+
+        /* Background with floating blue dots */
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .dot {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: blue;
+            border-radius: 50%;
+            animation: float 10s infinite;
+            opacity: 0;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) scale(0.5);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1);
+                opacity: 0;
+            }
+        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Roboto:wght@700&display=swap" rel="stylesheet">
 </head>
@@ -167,5 +206,43 @@
         </div>
         <input type="text" id="customSearchBar" class="custom-search-bar" placeholder="Search...">
     </div>
+
+    <!-- Background with floating blue dots -->
+    <div class="background" id="background"></div>
+
+    <script>
+        const searchBar = document.getElementById('customSearchBar');
+        searchBar.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                const baseUrl = 'https://wxstbound.global.ssl.fastly.net/embed.html#https://www.google.com/search?q=';
+                const query = encodeURIComponent(searchBar.value.trim());
+                window.location.href = `${baseUrl}${query}`;
+            }
+        });
+
+        // Generate floating blue dots
+        const background = document.getElementById('background');
+
+        function createDot() {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            dot.style.left = Math.random() * 100 + '%';
+            dot.style.animationDuration = Math.random() * 8 + 3 + 's';
+            dot.style.animationDelay = Math.random() * 2 + 's';
+            background.appendChild(dot);
+
+            dot.addEventListener('animationend', () => {
+                dot.remove();
+            });
+        }
+
+        for (let i = 0; i < 100; i++) {
+            createDot();
+        }
+
+        setInterval(() => {
+            createDot();
+        }, 500);
+    </script>
 </body>
 </html>
