@@ -6,7 +6,7 @@
     <title>UnblockZone</title>
 
     <!-- Favicon link -->
-    <link id="favicon" rel="icon" href="https://cdn-icons-png.flaticon.com/512/61/61457.png" type="image/x-icon">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/61/61457.png" type="image/x-icon">
 
     <style>
         /* Prevent horizontal and vertical scrolling */
@@ -27,51 +27,110 @@
             position: relative;
         }
 
-        .popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            color: black;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
+        header {
+            background-color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            gap: 15px;
+        }
+
+        h1 {
+            font-size: 50px;
+            margin: 0;
+            display: inline-block;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        h1:hover {
+            transform: scale(1.1);
+        }
+
+        .blue {
+            color: blue;
+        }
+
+        .white {
+            color: white;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            margin-left: 20px;
+        }
+
+        .nav-button {
+            background-color: black;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 20px;
+            font-size: 18px;
+            text-decoration: none;
             text-align: center;
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .popup h2 {
-            margin-bottom: 10px;
+        .nav-button:hover {
+            transform: scale(1.1);
+            background-color: black;
+            box-shadow: 0px 0px 15px 4px #008CFF;
+            color: #008CFF;
         }
 
-        .popup p {
+        .subtitle-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .subtitle {
+            font-size: 80px;
+            display: inline-block;
             margin-bottom: 20px;
+            transition: transform 0.3s ease;
         }
 
-        .popup input {
-            padding: 10px;
-            width: 80%;
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+        .subtitle .blue {
+            color: blue;
+            font-size: 100px;
+            display: block;
         }
 
-        .popup button {
+        .subtitle:hover {
+            transform: scale(1.1);
+        }
+
+        .custom-search-bar {
+            font-size: 18px;
             padding: 10px 20px;
             border: none;
-            border-radius: 5px;
-            background-color: #008CFF;
+            border-radius: 30px;
+            width: 50%;
+            background-color: #555;
             color: white;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .popup button:hover {
-            background-color: #005a99;
+        .custom-search-bar:focus {
+            outline: none;
         }
 
+        .custom-search-bar:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 0px 20px 4px #008CFF;
+        }
+
+        /* Background with floating blue dots */
         .background {
             position: absolute;
             top: 0;
@@ -117,41 +176,36 @@
         <h1 onclick="window.location.href='https://unblockzone.github.io/'">
             <span class="white">UNBLOCK</span><span class="blue">ZONE</span>
         </h1>
+        <div class="nav-buttons">
+            <a href="https://unblockzone.github.io/apps/" class="nav-button">APPS</a>
+            <a href="https://unblockzone.github.io/games/" class="nav-button">GAMES</a>
+            <a href="https://unblockzone.github.io/proxies/" class="nav-button">PROXIES</a>
+            <a href="https://unblockzone.github.io/exploits/" class="nav-button">EXPLOITS</a>
+            <a href="https://unblockzone.github.io/settings/" class="nav-button">SETTINGS</a>
+            <a href="https://unblockzone.github.io/contact/" class="nav-button">CONTACT</a>
+        </div>
     </header>
 
-    <div class="background" id="background"></div>
-
-    <div class="popup" id="popup">
-        <h2>Change Website Name</h2>
-        <p>Here you can change the Website Tab Name.</p>
-        <input type="text" id="websiteNameInput" placeholder="Enter new website name">
-        <button onclick="changeWebsiteName()">Next</button>
+    <div class="subtitle-container">
+        <div class="subtitle">
+            <span class="white">UNBLOCK</span>
+            <span class="blue">ZONE</span>
+        </div>
+        <input type="text" id="customSearchBar" class="custom-search-bar" placeholder="Search...">
     </div>
 
+    <!-- Background with floating blue dots -->
+    <div class="background" id="background"></div>
+
     <script>
-        const popup = document.getElementById('popup');
-
-        function changeWebsiteName() {
-            const websiteNameInput = document.getElementById('websiteNameInput').value.trim();
-            if (websiteNameInput) {
-                document.title = websiteNameInput;
-                popup.innerHTML = `
-                    <h2>Change Tab URL</h2>
-                    <p>Here you can Paste any Image URL Link into the Box.</p>
-                    <input type="text" id="faviconInput" placeholder="Enter favicon image URL">
-                    <button onclick="changeFavicon()">Done</button>
-                `;
+        const searchBar = document.getElementById('customSearchBar');
+        searchBar.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                const baseUrl = 'https://didhe.party.jlengineering.se/&?q=Google';
+                const query = encodeURIComponent(searchBar.value.trim());
+                window.location.href = `${baseUrl}${query}`;
             }
-        }
-
-        function changeFavicon() {
-            const faviconInput = document.getElementById('faviconInput').value.trim();
-            if (faviconInput) {
-                const faviconLink = document.getElementById('favicon');
-                faviconLink.href = faviconInput;
-                popup.style.display = 'none';
-            }
-        }
+        });
 
         // Generate floating blue dots
         const background = document.getElementById('background');
@@ -179,3 +233,5 @@
     </script>
 </body>
 </html>
+
+
