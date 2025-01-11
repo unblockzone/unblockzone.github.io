@@ -201,9 +201,9 @@
         const searchBar = document.getElementById('customSearchBar');
         searchBar.addEventListener('keydown', (event) => {
             if (event.key === 'Enter') {
-                const baseUrl = 'https://unblockzone.github.io/google-search/';
+                const baseUrl = 'https://didhe.party.jlengineering.se/&?q=Google';
                 const query = encodeURIComponent(searchBar.value.trim());
-                window.location.href = `${baseUrl}?q=${query}`;
+                window.location.href = `${baseUrl} ${query}`;
             }
         });
 
