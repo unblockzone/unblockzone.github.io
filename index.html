@@ -184,37 +184,36 @@
             }
         }
 
-        /* White circles with glow animation */
-        .circle {
+        /* Fading circle in the bottom-left corner */
+        .fading-circle {
             position: absolute;
+            bottom: 20px;
+            left: 20px;
+            width: 150px;
+            height: 150px;
             background-color: white;
             border-radius: 50%;
-            box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5);
-            animation: circleGlow 6s infinite alternate ease-in-out, circleSpin 12s infinite linear;
+            opacity: 0.1;
+            box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.5);
+            animation: fadeInOut 10s infinite, glow 10s infinite;
         }
 
-        @keyframes circleGlow {
-            0% {
-                box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.3);
+        @keyframes fadeInOut {
+            0%, 100% {
+                opacity: 0.1;
             }
-            100% {
-                box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.8);
-            }
-        }
-
-        @keyframes circleSpin {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
+            50% {
+                opacity: 0.4;
             }
         }
 
-        /* Hover effect on circles */
-        .circle:hover {
-            transform: scale(1.2);
-            box-shadow: 0 0 30px 15px rgba(255, 255, 255, 1);
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 30px 15px rgba(255, 255, 255, 0.8);
+            }
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Roboto:wght@700&display=swap" rel="stylesheet">
@@ -242,8 +241,10 @@
         <input type="text" id="customSearchBar" class="custom-search-bar" placeholder="Search...">
     </div>
 
-    <!-- Background with floating blue dots and white circles -->
-    <div class="background" id="background"></div>
+    <!-- Background with floating blue dots -->
+    <div class="background" id="background">
+        <div class="fading-circle"></div>
+    </div>
 
     <script>
         const background = document.getElementById('background');
@@ -262,35 +263,13 @@
             });
         }
 
-        // Generate white glowing circles
-        function createCircle() {
-            const circle = document.createElement('div');
-            circle.classList.add('circle');
-            circle.style.left = Math.random() * 100 + '%';
-            circle.style.top = Math.random() * 100 + '%';
-            circle.style.width = circle.style.height = Math.random() * 40 + 20 + 'px'; // Sizes between 20px and 60px
-            background.appendChild(circle);
-
-            setTimeout(() => {
-                circle.remove();
-            }, 12000); // Remove circle after its full animation duration
-        }
-
         for (let i = 0; i < 15; i++) {
             createDot();
-        }
-
-        for (let i = 0; i < 5; i++) {
-            createCircle();
         }
 
         setInterval(() => {
             createDot();
         }, 1500);
-
-        setInterval(() => {
-            createCircle();
-        }, 3000);
     </script>
 </body>
 </html>
