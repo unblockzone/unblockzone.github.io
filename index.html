@@ -18,7 +18,7 @@
         }
 
         body {
-            background: linear-gradient(-45deg, #000, #001f3f, #003f7f, #005fbf);
+            background: linear-gradient(-45deg, black, #000011, #001122, black);
             background-size: 300% 300%;
             animation: gradientAnimation 15s ease infinite;
             font-family: 'Bowlby One', sans-serif;
@@ -145,7 +145,7 @@
             box-shadow: 0px 0px 20px 4px #008CFF;
         }
 
-        /* Background with floating blue dots and blue glow */
+        /* Background animations */
         .background {
             position: absolute;
             top: 0;
@@ -157,19 +157,20 @@
             z-index: -1;
         }
 
+        /* Blue dots floating */
         .dot {
             position: absolute;
             background-color: blue;
             border-radius: 50%;
             box-shadow: 0 0 8px 4px blue;
-            animation: float 10s infinite ease-in-out;
-            opacity: 0;
+            animation: float 12s infinite ease-in-out;
+            opacity: 0.8;
         }
 
         @keyframes float {
             0% {
                 transform: translateY(100vh) scale(0.5);
-                opacity: 0;
+                opacity: 0.5;
             }
             20% {
                 opacity: 1;
@@ -179,8 +180,41 @@
             }
             100% {
                 transform: translateY(-10vh) scale(1);
-                opacity: 0;
+                opacity: 0.5;
             }
+        }
+
+        /* White circles with glow animation */
+        .circle {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5);
+            animation: circleGlow 6s infinite alternate ease-in-out, circleSpin 12s infinite linear;
+        }
+
+        @keyframes circleGlow {
+            0% {
+                box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.3);
+            }
+            100% {
+                box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.8);
+            }
+        }
+
+        @keyframes circleSpin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Hover effect on circles */
+        .circle:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 30px 15px rgba(255, 255, 255, 1);
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Roboto:wght@700&display=swap" rel="stylesheet">
@@ -208,20 +242,19 @@
         <input type="text" id="customSearchBar" class="custom-search-bar" placeholder="Search...">
     </div>
 
-    <!-- Background with floating blue dots -->
+    <!-- Background with floating blue dots and white circles -->
     <div class="background" id="background"></div>
 
     <script>
         const background = document.getElementById('background');
 
-        // Generate floating blue dots with varying sizes
+        // Generate floating blue dots
         function createDot() {
             const dot = document.createElement('div');
             dot.classList.add('dot');
             dot.style.left = Math.random() * 100 + '%';
             dot.style.width = dot.style.height = Math.random() * 20 + 5 + 'px'; // Sizes between 5px and 25px
-            dot.style.animationDuration = Math.random() * 8 + 3 + 's';
-            dot.style.animationDelay = Math.random() * 2 + 's';
+            dot.style.animationDuration = Math.random() * 8 + 4 + 's';
             background.appendChild(dot);
 
             dot.addEventListener('animationend', () => {
@@ -229,13 +262,35 @@
             });
         }
 
-        for (let i = 0; i < 100; i++) {
+        // Generate white glowing circles
+        function createCircle() {
+            const circle = document.createElement('div');
+            circle.classList.add('circle');
+            circle.style.left = Math.random() * 100 + '%';
+            circle.style.top = Math.random() * 100 + '%';
+            circle.style.width = circle.style.height = Math.random() * 40 + 20 + 'px'; // Sizes between 20px and 60px
+            background.appendChild(circle);
+
+            setTimeout(() => {
+                circle.remove();
+            }, 12000); // Remove circle after its full animation duration
+        }
+
+        for (let i = 0; i < 15; i++) {
             createDot();
+        }
+
+        for (let i = 0; i < 5; i++) {
+            createCircle();
         }
 
         setInterval(() => {
             createDot();
-        }, 500);
+        }, 1500);
+
+        setInterval(() => {
+            createCircle();
+        }, 3000);
     </script>
 </body>
 </html>
