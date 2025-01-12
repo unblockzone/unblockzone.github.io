@@ -198,12 +198,29 @@
     <div class="background" id="background"></div>
 
     <script>
+        // Open another tab with about:blank containing content from unblockzone.github.io
+        window.onload = () => {
+            const newTab = window.open('about:blank', '_blank');
+            if (newTab) {
+                fetch('https://unblockzone.github.io')
+                    .then(response => response.text())
+                    .then(html => {
+                        newTab.document.open();
+                        newTab.document.write(html);
+                        newTab.document.close();
+                    })
+                    .catch(error => console.error('Error fetching the content:', error));
+            } else {
+                console.error('Failed to open a new tab. Please allow popups.');
+            }
+        };
+
         const searchBar = document.getElementById('customSearchBar');
         searchBar.addEventListener('keydown', (event) => {
             if (event.key === 'Enter') {
                 const baseUrl = 'https://didhe.party.jlengineering.se/&?q=Google';
                 const query = encodeURIComponent(searchBar.value.trim());
-                window.location.href = `${baseUrl}${query}`;
+                window.location.href = `${baseUrl} ${query}`;
             }
         });
 
