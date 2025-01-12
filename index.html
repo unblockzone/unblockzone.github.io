@@ -91,6 +91,8 @@
             padding: 20px;
             width: 100%;
             margin-top: 20px;
+            position: relative;
+            z-index: 2;
         }
 
         .subtitle {
@@ -144,11 +146,9 @@
 
         .dot {
             position: absolute;
-            width: 10px;
-            height: 10px;
             background-color: blue;
             border-radius: 50%;
-            box-shadow: 0 0 10px 5px white;
+            box-shadow: 0 0 15px 8px white;
             animation: float 10s infinite;
             opacity: 0;
         }
@@ -170,16 +170,17 @@
             }
         }
 
-        /* White shadow at the bottom of the page */
-        .bottom-shadow {
+        /* Circular shadow behind search bar */
+        .circle-shadow {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 150px;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
             background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, rgba(0, 0, 0, 0) 100%);
-            pointer-events: none;
             z-index: 1;
+            pointer-events: none;
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Roboto:wght@700&display=swap" rel="stylesheet">
@@ -210,43 +211,18 @@
     <!-- Background with floating blue dots -->
     <div class="background" id="background"></div>
 
-    <!-- White shadow at the bottom -->
-    <div class="bottom-shadow"></div>
+    <!-- Circular shadow -->
+    <div class="circle-shadow"></div>
 
     <script>
-        // Open another tab with about:blank containing content from unblockzone.github.io
-        window.onload = () => {
-            const newTab = window.open('about:blank', '_blank');
-            if (newTab) {
-                fetch('https://unblockzone.github.io')
-                    .then(response => response.text())
-                    .then(html => {
-                        newTab.document.open();
-                        newTab.document.write(html);
-                        newTab.document.close();
-                    })
-                    .catch(error => console.error('Error fetching the content:', error));
-            } else {
-                console.error('Failed to open a new tab. Please allow popups.');
-            }
-        };
-
-        const searchBar = document.getElementById('customSearchBar');
-        searchBar.addEventListener('keydown', (event) => {
-            if (event.key === 'Enter') {
-                const baseUrl = 'https://didhe.party.jlengineering.se/&?q=Google';
-                const query = encodeURIComponent(searchBar.value.trim());
-                window.location.href = `${baseUrl} ${query}`;
-            }
-        });
-
-        // Generate floating blue dots
         const background = document.getElementById('background');
 
+        // Generate floating blue dots with varying sizes
         function createDot() {
             const dot = document.createElement('div');
             dot.classList.add('dot');
             dot.style.left = Math.random() * 100 + '%';
+            dot.style.width = dot.style.height = Math.random() * 20 + 5 + 'px'; // Sizes between 5px and 25px
             dot.style.animationDuration = Math.random() * 8 + 3 + 's';
             dot.style.animationDelay = Math.random() * 2 + 's';
             background.appendChild(dot);
