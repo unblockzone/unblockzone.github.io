@@ -183,38 +183,6 @@
                 opacity: 0.5;
             }
         }
-
-        /* Fading circle in the bottom-left corner */
-        .fading-circle {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            width: 150px;
-            height: 150px;
-            background-color: white;
-            border-radius: 50%;
-            opacity: 0.1;
-            box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.5);
-            animation: fadeInOut 10s infinite, glow 10s infinite;
-        }
-
-        @keyframes fadeInOut {
-            0%, 100% {
-                opacity: 0.1;
-            }
-            50% {
-                opacity: 0.4;
-            }
-        }
-
-        @keyframes glow {
-            0%, 100% {
-                box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.5);
-            }
-            50% {
-                box-shadow: 0 0 30px 15px rgba(255, 255, 255, 0.8);
-            }
-        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Roboto:wght@700&display=swap" rel="stylesheet">
 </head>
@@ -242,9 +210,7 @@
     </div>
 
     <!-- Background with floating blue dots -->
-    <div class="background" id="background">
-        <div class="fading-circle"></div>
-    </div>
+    <div class="background" id="background"></div>
 
     <script>
         const background = document.getElementById('background');
