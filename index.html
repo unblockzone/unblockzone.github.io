@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -146,6 +147,18 @@
             box-shadow: 0px 0px 20px 4px #008CFF;
         }
 
+        /* Background animations */
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            overflow: hidden;
+            z-index: -1;
+        }
+
         /* Blue dots floating */
         .dot {
             position: absolute;
@@ -172,59 +185,8 @@
                 opacity: 0.5;
             }
         }
-
-        /* Open Settings Button */
-        .settings-btn {
-            margin-top: 30px;
-            padding: 10px 20px;
-            border-radius: 25px;
-            background-color: transparent;
-            color: white;
-            font-size: 20px;
-            border: 2px solid #008CFF;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-        }
-
-        .settings-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px 5px #008CFF;
-            color: #008CFF;
-        }
-
-        /* Settings Dropdown */
-        .settings-dropdown {
-            display: none;
-            margin-top: 10px;
-            background-color: #333;
-            border-radius: 10px;
-            box-shadow: 0 0 10px 5px #008CFF;
-            padding: 10px;
-            width: 300px;
-            text-align: left;
-            transition: opacity 0.3s ease-in-out;
-        }
-
-        .settings-dropdown.show {
-            display: block;
-            opacity: 1;
-        }
-
-        .cloaker-option {
-            background-color: #222;
-            border-radius: 10px;
-            padding: 10px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .cloaker-option:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 10px 5px #008CFF;
-        }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Roboto:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -247,25 +209,6 @@
             <span class="blue">ZONE</span>
         </div>
         <input type="text" id="customSearchBar" class="custom-search-bar" placeholder="Search...">
-    </div>
-
-    <!-- Open Settings Button -->
-    <button class="settings-btn" onclick="toggleSettings()">Open Settings</button>
-
-    <!-- Settings Dropdown -->
-    <div class="settings-dropdown" id="settingsDropdown">
-        <div class="cloaker-option" onclick="setTabCloak('Canvas', 'https://copyleaks.com/wp-content/uploads/2022/08/Canvas_Logo.webp')">
-            <img src="https://copyleaks.com/wp-content/uploads/2022/08/Canvas_Logo.webp" alt="Canvas" width="40">
-            Canvas
-        </div>
-        <div class="cloaker-option" onclick="setTabCloak('Google Drive', 'https://icons.iconarchive.com/icons/marcus-roberto/google-play/512/Google-Drive-icon.png')">
-            <img src="https://icons.iconarchive.com/icons/marcus-roberto/google-play/512/Google-Drive-icon.png" alt="Google Drive" width="40">
-            Google Drive
-        </div>
-        <div class="cloaker-option" onclick="setTabCloak('YouTube', 'https://cdn-icons-png.flaticon.com/512/1384/1384060.png')">
-            <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" width="40">
-            YouTube
-        </div>
     </div>
 
     <!-- Background with floating blue dots -->
@@ -305,30 +248,11 @@
             }
         });
 
-        // Toggle settings dropdown
-        function toggleSettings() {
-            const settingsDropdown = document.getElementById('settingsDropdown');
-            settingsDropdown.classList.toggle('show');
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js')
+                .then(() => console.log('Service Worker registered successfully.'))
+                .catch(err => console.log('Service Worker registration failed:', err));
         }
-
-        // Set tab cloaking function
-        function setTabCloak(title, iconUrl) {
-            document.title = title;
-            if (iconUrl) {
-                const link = document.querySelector("link[rel~='icon']") || document.createElement('link');
-                link.rel = 'icon';
-                link.href = iconUrl;
-                document.getElementsByTagName('head')[0].appendChild(link);
-            }
-
-            localStorage.setItem('tabCloak', JSON.stringify({ title, iconUrl }));
-        }
-
-        // On page load
-        window.onload = function () {
-            const tabCloak = JSON.parse(localStorage.getItem('tabCloak'));
-            if (tabCloak) setTabCloak(tabCloak.title, tabCloak.iconUrl);
-        };
     </script>
 </body>
 </html>
