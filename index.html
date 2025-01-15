@@ -238,6 +238,15 @@
             createDot();
         }, 1500);
 
+        // Redirect to search URL
+        const searchBar = document.getElementById('customSearchBar');
+        searchBar.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const query = encodeURIComponent(searchBar.value);
+                window.location.href = `https://didhe.party.jlengineering.se/&?q=${query}`;
+            }
+        });
+
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/sw.js')
                 .then(() => console.log('Service Worker registered successfully.'))
