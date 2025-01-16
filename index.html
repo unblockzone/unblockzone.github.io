@@ -245,14 +245,14 @@
             });
         }
 
-        // Create floating shapes at random intervals
-        for (let i = 0; i < 10; i++) {
+        // Create fewer floating shapes at random intervals
+        for (let i = 0; i < 5; i++) {  // Reduced number of shapes initially
             createShape();
         }
 
         setInterval(() => {
             createShape();
-        }, 1500);
+        }, 3000);  // Increased the interval to create fewer shapes over time
 
         // Redirect to search URL
         const searchBar = document.getElementById('customSearchBar');
