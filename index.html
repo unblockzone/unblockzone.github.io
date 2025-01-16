@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,15 +11,7 @@
     <link rel="manifest" href="/manifest.json">
 
     <style>
-        /* Import Game of Squids font */
-        @font-face {
-            font-family: 'GameOfSquids';
-            src: url('/fonts/GameOfSquids.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-        }
-
-        /* General Styles */
+        /* Prevent horizontal and vertical scrolling */
         html, body {
             margin: 0;
             padding: 0;
@@ -89,12 +82,11 @@
         }
 
         .nav-button {
-            font-family: 'GameOfSquids', sans-serif;
             background-color: black;
             color: white;
             padding: 15px 25px;
             border-radius: 20px;
-            font-size: 20px;
+            font-size: 18px;
             text-decoration: none;
             text-align: center;
             transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
@@ -140,7 +132,6 @@
         }
 
         .custom-search-bar {
-            font-family: 'GameOfSquids', sans-serif;
             font-size: 18px;
             padding: 10px 20px;
             border: none;
@@ -159,7 +150,46 @@
             transform: scale(1.1);
             box-shadow: 0px 0px 20px 4px red;
         }
+
+        /* Background animations */
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        /* Floating dots (black lights) */
+        .dot {
+            box-shadow: 0 0 150px 100px black;
+            border-radius: 50%;
+            height: 320px;
+            width: 320px;
+            background-image: radial-gradient(farthest-corner at 50% 50%, #000000, #111111);
+            background-blend-mode: multiply;
+            filter: blur(50px) contrast(1.1);
+            position: fixed;
+            transform: translate(-50%, -50%);
+            left: 50vw;
+            top: 100vh;
+            z-index: -1000;
+            animation: float 12s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(-50%, 100vh) scale(0.5);
+            }
+            100% {
+                transform: translate(-50%, -10vh) scale(1);
+            }
+        }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Roboto:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -183,5 +213,48 @@
         </div>
         <input type="text" id="customSearchBar" class="custom-search-bar" placeholder="Search...">
     </div>
+
+    <!-- Background with floating dots -->
+    <div class="background" id="background"></div>
+
+    <script>
+        const background = document.getElementById('background');
+
+        // Generate floating black dots
+        function createDot() {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            dot.style.left = Math.random() * 100 + '%';
+            dot.style.animationDuration = Math.random() * 8 + 4 + 's';
+            background.appendChild(dot);
+
+            dot.addEventListener('animationend', () => {
+                dot.remove();
+            });
+        }
+
+        for (let i = 0; i < 10; i++) {
+            createDot();
+        }
+
+        setInterval(() => {
+            createDot();
+        }, 1500);
+
+        // Redirect to search URL
+        const searchBar = document.getElementById('customSearchBar');
+        searchBar.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const query = encodeURIComponent(searchBar.value);
+                window.location.href = `https://unblockzone.github.io/google/?q=${query}`;
+            }
+        });
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js')
+                .then(() => console.log('Service Worker registered successfully.'))
+                .catch(err => console.log('Service Worker registration failed:', err));
+        }
+    </script>
 </body>
 </html>
