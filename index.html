@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,12 +66,12 @@
             transform: scale(1.1);
         }
 
-        .blue {
-            color: blue;
+        .red {
+            color: red;
         }
 
-        .white {
-            color: white;
+        .black {
+            color: black;
         }
 
         .nav-buttons {
@@ -95,8 +94,8 @@
         .nav-button:hover {
             transform: scale(1.1);
             background-color: black;
-            box-shadow: 0px 0px 15px 4px #008CFF;
-            color: #008CFF;
+            box-shadow: 0px 0px 15px 4px red;
+            color: red;
         }
 
         .subtitle-container {
@@ -117,8 +116,8 @@
             transition: transform 0.3s ease;
         }
 
-        .subtitle .blue {
-            color: blue;
+        .subtitle .red {
+            color: red;
             font-size: 100px;
             display: block;
         }
@@ -144,7 +143,7 @@
 
         .custom-search-bar:hover {
             transform: scale(1.1);
-            box-shadow: 0px 0px 20px 4px #008CFF;
+            box-shadow: 0px 0px 20px 4px red;
         }
 
         /* Background animations */
@@ -159,12 +158,12 @@
             z-index: -1;
         }
 
-        /* Blue dots floating */
+        /* Red dots floating */
         .dot {
             position: absolute;
-            background-color: blue;
+            background-color: red;
             border-radius: 50%;
-            box-shadow: 0 0 8px 4px blue;
+            box-shadow: 0 0 8px 4px red;
             animation: float 12s infinite ease-in-out;
             opacity: 0.8;
         }
@@ -191,7 +190,7 @@
 <body>
     <header>
         <h1 onclick="window.location.href='https://unblockzone.github.io/'">
-            <span class="white">UNBLOCK</span><span class="blue">ZONE</span>
+            <span class="red">UNBLOCK</span><span class="black">ZONE</span>
         </h1>
         <div class="nav-buttons">
             <a href="https://unblockzone.github.io/apps/" class="nav-button">APPS</a>
@@ -205,19 +204,19 @@
 
     <div class="subtitle-container">
         <div class="subtitle">
-            <span class="white">UNBLOCK</span>
-            <span class="blue">ZONE</span>
+            <span class="red">UNBLOCK</span>
+            <span class="black">ZONE</span>
         </div>
         <input type="text" id="customSearchBar" class="custom-search-bar" placeholder="Search...">
     </div>
 
-    <!-- Background with floating blue dots -->
+    <!-- Background with floating red dots -->
     <div class="background" id="background"></div>
 
     <script>
         const background = document.getElementById('background');
 
-        // Generate floating blue dots
+        // Generate floating red dots
         function createDot() {
             const dot = document.createElement('div');
             dot.classList.add('dot');
