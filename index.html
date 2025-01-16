@@ -55,7 +55,7 @@
         }
 
         h1 {
-            font-size: 50px;
+            font-size: 45px; /* Reduced font size */
             margin: 0;
             display: inline-block;
             transition: transform 0.3s ease;
@@ -64,6 +64,10 @@
 
         h1:hover {
             transform: scale(1.1);
+        }
+
+        .red {
+            color: red;
         }
 
         .white {
@@ -106,16 +110,20 @@
         }
 
         .subtitle {
-            font-size: 80px;
+            font-size: 70px; /* Reduced font size slightly */
             display: inline-block;
             margin-bottom: 20px;
             transition: transform 0.3s ease;
         }
 
+        .subtitle .red {
+            color: red;
+            font-size: 100px; /* Keep "ZONE" larger */
+            display: block;
+        }
+
         .subtitle .white {
             color: white;
-            font-size: 120px; /* Increased font size */
-            display: block;
         }
 
         .subtitle:hover {
@@ -154,19 +162,26 @@
             z-index: -1;
         }
 
-        /* Red dots floating */
+        /* Updated floating dot styles */
         .dot {
-            position: absolute;
-            background-color: red;
+            box-shadow: 0 0 150px 100px #00bbff;
             border-radius: 50%;
-            box-shadow: 0 0 8px 4px red;
+            height: 320px;
+            width: 320px;
+            background-image: radial-gradient(farthest-corner at 50% 50%, #ffffff, #009dff);
+            background-blend-mode: multiply;
+            filter: blur(50px) contrast(1.1);
+            position: fixed;
+            transform: translate(-50%, -50%);
+            left: 50vw;
+            top: 100vh;
+            z-index: -1000;
             animation: float 12s infinite ease-in-out;
-            opacity: 0.8;
         }
 
         @keyframes float {
             0% {
-                transform: translateY(100vh) scale(0.5);
+                transform: translate(-50%, 100vh) scale(0.5);
                 opacity: 0.5;
             }
             20% {
@@ -176,7 +191,7 @@
                 opacity: 1;
             }
             100% {
-                transform: translateY(-10vh) scale(1);
+                transform: translate(-50%, -10vh) scale(1);
                 opacity: 0.5;
             }
         }
@@ -186,7 +201,7 @@
 <body>
     <header>
         <h1 onclick="window.location.href='https://unblockzone.github.io/'">
-            <span class="white">UNBLOCK</span><span class="white">ZONE</span>
+            <span class="white">UNBLOCK</span><span class="red">ZONE</span>
         </h1>
         <div class="nav-buttons">
             <a href="https://unblockzone.github.io/apps/" class="nav-button">APPS</a>
@@ -201,23 +216,22 @@
     <div class="subtitle-container">
         <div class="subtitle">
             <span class="white">UNBLOCK</span>
-            <span class="white">ZONE</span>
+            <span class="red">ZONE</span>
         </div>
         <input type="text" id="customSearchBar" class="custom-search-bar" placeholder="Search...">
     </div>
 
-    <!-- Background with floating red dots -->
+    <!-- Background with floating dots -->
     <div class="background" id="background"></div>
 
     <script>
         const background = document.getElementById('background');
 
-        // Generate floating red dots
+        // Generate floating dots
         function createDot() {
             const dot = document.createElement('div');
             dot.classList.add('dot');
             dot.style.left = Math.random() * 100 + '%';
-            dot.style.width = dot.style.height = Math.random() * 20 + 5 + 'px'; // Sizes between 5px and 25px
             dot.style.animationDuration = Math.random() * 8 + 4 + 's';
             background.appendChild(dot);
 
@@ -226,7 +240,7 @@
             });
         }
 
-        for (let i = 0; i < 15; i++) {
+        for (let i = 0; i < 10; i++) {
             createDot();
         }
 
