@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -163,29 +162,40 @@
             z-index: -1;
         }
 
-        /* Floating dots (black lights) */
-        .dot {
-            box-shadow: 0 0 150px 100px black;
-            border-radius: 50%;
-            height: 320px;
-            width: 320px;
-            background-image: radial-gradient(farthest-corner at 50% 50%, #000000, #111111);
-            background-blend-mode: multiply;
-            filter: blur(50px) contrast(1.1);
-            position: fixed;
-            transform: translate(-50%, -50%);
-            left: 50vw;
-            top: 100vh;
-            z-index: -1000;
-            animation: float 12s infinite ease-in-out;
+        /* Floating black shapes */
+        .shape {
+            position: absolute;
+            filter: blur(5px);
+            animation: floatUp 10s linear infinite;
         }
 
-        @keyframes float {
+        .shape.triangle {
+            width: 0;
+            height: 0;
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            border-bottom: 60px solid black;
+        }
+
+        .shape.square {
+            width: 50px;
+            height: 50px;
+            background-color: black;
+        }
+
+        .shape.circle {
+            width: 50px;
+            height: 50px;
+            background-color: black;
+            border-radius: 50%;
+        }
+
+        @keyframes floatUp {
             0% {
-                transform: translate(-50%, 100vh) scale(0.5);
+                transform: translateY(100vh) scale(0.5);
             }
             100% {
-                transform: translate(-50%, -10vh) scale(1);
+                transform: translateY(-100vh) scale(1);
             }
         }
     </style>
@@ -214,31 +224,34 @@
         <input type="text" id="customSearchBar" class="custom-search-bar" placeholder="Search...">
     </div>
 
-    <!-- Background with floating dots -->
+    <!-- Background with floating shapes -->
     <div class="background" id="background"></div>
 
     <script>
         const background = document.getElementById('background');
 
-        // Generate floating black dots
-        function createDot() {
-            const dot = document.createElement('div');
-            dot.classList.add('dot');
-            dot.style.left = Math.random() * 100 + '%';
-            dot.style.animationDuration = Math.random() * 8 + 4 + 's';
-            background.appendChild(dot);
+        // Function to create floating shapes
+        function createShape() {
+            const shape = document.createElement('div');
+            const shapeType = ['triangle', 'square', 'circle'][Math.floor(Math.random() * 3)];
+            shape.classList.add('shape', shapeType);
+            shape.style.left = Math.random() * 100 + '%';
+            shape.style.animationDuration = Math.random() * 10 + 5 + 's';
+            shape.style.animationDelay = Math.random() * 5 + 's';
+            background.appendChild(shape);
 
-            dot.addEventListener('animationend', () => {
-                dot.remove();
+            shape.addEventListener('animationend', () => {
+                shape.remove();
             });
         }
 
+        // Create floating shapes at random intervals
         for (let i = 0; i < 10; i++) {
-            createDot();
+            createShape();
         }
 
         setInterval(() => {
-            createDot();
+            createShape();
         }, 1500);
 
         // Redirect to search URL
