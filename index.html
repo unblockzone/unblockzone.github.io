@@ -55,7 +55,7 @@
         }
 
         h1 {
-            font-size: 45px; /* Reduced font size */
+            font-size: 45px;
             margin: 0;
             display: inline-block;
             transition: transform 0.3s ease;
@@ -110,7 +110,7 @@
         }
 
         .subtitle {
-            font-size: 70px; /* Reduced font size slightly */
+            font-size: 70px;
             display: inline-block;
             margin-bottom: 20px;
             transition: transform 0.3s ease;
@@ -118,7 +118,7 @@
 
         .subtitle .red {
             color: red;
-            font-size: 100px; /* Keep "ZONE" larger */
+            font-size: 100px;
             display: block;
         }
 
@@ -162,13 +162,13 @@
             z-index: -1;
         }
 
-        /* Updated floating dot styles */
+        /* Floating dots (black lights) */
         .dot {
-            box-shadow: 0 0 150px 100px #00bbff;
+            box-shadow: 0 0 150px 100px black;
             border-radius: 50%;
             height: 320px;
             width: 320px;
-            background-image: radial-gradient(farthest-corner at 50% 50%, #ffffff, #009dff);
+            background-image: radial-gradient(farthest-corner at 50% 50%, #000000, #111111);
             background-blend-mode: multiply;
             filter: blur(50px) contrast(1.1);
             position: fixed;
@@ -182,17 +182,9 @@
         @keyframes float {
             0% {
                 transform: translate(-50%, 100vh) scale(0.5);
-                opacity: 0.5;
-            }
-            20% {
-                opacity: 1;
-            }
-            80% {
-                opacity: 1;
             }
             100% {
                 transform: translate(-50%, -10vh) scale(1);
-                opacity: 0.5;
             }
         }
     </style>
@@ -227,7 +219,7 @@
     <script>
         const background = document.getElementById('background');
 
-        // Generate floating dots
+        // Generate floating black dots
         function createDot() {
             const dot = document.createElement('div');
             dot.classList.add('dot');
