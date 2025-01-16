@@ -19,7 +19,7 @@
         }
 
         body {
-            background: linear-gradient(-45deg, black, #000011, #001122, black);
+            background: linear-gradient(-45deg, black, #330000, #660000, black);
             background-size: 300% 300%;
             animation: gradientAnimation 15s ease infinite;
             font-family: 'Bowlby One', sans-serif;
@@ -66,12 +66,8 @@
             transform: scale(1.1);
         }
 
-        .red {
-            color: red;
-        }
-
-        .black {
-            color: black;
+        .white {
+            color: white;
         }
 
         .nav-buttons {
@@ -116,9 +112,9 @@
             transition: transform 0.3s ease;
         }
 
-        .subtitle .red {
-            color: red;
-            font-size: 100px;
+        .subtitle .white {
+            color: white;
+            font-size: 120px; /* Increased font size */
             display: block;
         }
 
@@ -190,7 +186,7 @@
 <body>
     <header>
         <h1 onclick="window.location.href='https://unblockzone.github.io/'">
-            <span class="red">UNBLOCK</span><span class="black">ZONE</span>
+            <span class="white">UNBLOCK</span><span class="white">ZONE</span>
         </h1>
         <div class="nav-buttons">
             <a href="https://unblockzone.github.io/apps/" class="nav-button">APPS</a>
@@ -204,8 +200,8 @@
 
     <div class="subtitle-container">
         <div class="subtitle">
-            <span class="red">UNBLOCK</span>
-            <span class="black">ZONE</span>
+            <span class="white">UNBLOCK</span>
+            <span class="white">ZONE</span>
         </div>
         <input type="text" id="customSearchBar" class="custom-search-bar" placeholder="Search...">
     </div>
