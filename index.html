@@ -149,55 +149,6 @@
             transform: scale(1.1);
             box-shadow: 0px 0px 20px 4px red;
         }
-
-        /* Background animations */
-        .background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: transparent;
-            overflow: hidden;
-            z-index: -1;
-        }
-
-        /* Floating black shapes */
-        .shape {
-            position: absolute;
-            filter: blur(5px);
-            animation: floatUp 10s linear infinite;
-        }
-
-        .shape.triangle {
-            width: 0;
-            height: 0;
-            border-left: 30px solid transparent;
-            border-right: 30px solid transparent;
-            border-bottom: 60px solid black;
-        }
-
-        .shape.square {
-            width: 50px;
-            height: 50px;
-            background-color: black;
-        }
-
-        .shape.circle {
-            width: 50px;
-            height: 50px;
-            background-color: black;
-            border-radius: 50%;
-        }
-
-        @keyframes floatUp {
-            0% {
-                transform: translateY(100vh) scale(0.5);
-            }
-            100% {
-                transform: translateY(-100vh) scale(1);
-            }
-        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Roboto:wght@700&display=swap" rel="stylesheet">
 </head>
@@ -224,36 +175,7 @@
         <input type="text" id="customSearchBar" class="custom-search-bar" placeholder="Search...">
     </div>
 
-    <!-- Background with floating shapes -->
-    <div class="background" id="background"></div>
-
     <script>
-        const background = document.getElementById('background');
-
-        // Function to create floating shapes
-        function createShape() {
-            const shape = document.createElement('div');
-            const shapeType = ['triangle', 'square', 'circle'][Math.floor(Math.random() * 3)];
-            shape.classList.add('shape', shapeType);
-            shape.style.left = Math.random() * 100 + '%';
-            shape.style.animationDuration = Math.random() * 10 + 5 + 's';
-            shape.style.animationDelay = Math.random() * 5 + 's';
-            background.appendChild(shape);
-
-            shape.addEventListener('animationend', () => {
-                shape.remove();
-            });
-        }
-
-        // Create fewer floating shapes at random intervals
-        for (let i = 0; i < 5; i++) {  // Reduced number of shapes initially
-            createShape();
-        }
-
-        setInterval(() => {
-            createShape();
-        }, 3000);  // Increased the interval to create fewer shapes over time
-
         // Redirect to search URL
         const searchBar = document.getElementById('customSearchBar');
         searchBar.addEventListener('keypress', (e) => {
