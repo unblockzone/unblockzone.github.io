@@ -6,7 +6,7 @@
     <title>UnblockZone</title>
 
     <!-- Favicon link -->
-    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/61/61457.png" type="image/x-icon">
+    <link id="favicon" rel="icon" href="https://cdn-icons-png.flaticon.com/512/61/61457.png" type="image/x-icon">
     <link rel="manifest" href="/manifest.json">
 
     <style>
@@ -185,11 +185,25 @@
             }
         });
 
+        // Service Worker Registration
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/sw.js')
                 .then(() => console.log('Service Worker registered successfully.'))
                 .catch(err => console.log('Service Worker registration failed:', err));
         }
+
+        // Tab Cloaker Functionality
+        function setTabCloak(title, icon) {
+            document.title = title;
+            const favicon = document.getElementById('favicon');
+            if (favicon) {
+                favicon.href = icon;
+            }
+        }
+
+        // Example usage for Tab Cloaker
+        // Uncomment the following line to test
+        // setTabCloak('YouTube', 'https://cdn-icons-png.flaticon.com/512/1384/1384060.png');
     </script>
 </body>
 </html>
