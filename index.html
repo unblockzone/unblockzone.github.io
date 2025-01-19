@@ -144,7 +144,6 @@
 
         .custom-search-bar:hover {
             transform: scale(1.1);
-            box-shadow: 0px 0px 20px 4px red;
         }
 
         .theme-dots {
@@ -210,21 +209,23 @@
 
     <script>
         const themes = {
-            white: { background: 'linear-gradient(-45deg, white, lightgray)', text: 'black' },
-            pink: { background: 'linear-gradient(-45deg, pink, lightpink)', text: 'pink' },
-            red: { background: 'linear-gradient(-45deg, black, #330000, #660000)', text: 'red' },
-            green: { background: 'linear-gradient(-45deg, black, #003300, #006600)', text: 'green' },
-            original: { background: 'linear-gradient(-45deg, black, #330000, #660000)', text: 'red' }
+            white: { background: 'linear-gradient(-45deg, white, lightgray)', text: 'black', glow: 'lightgray' },
+            pink: { background: 'linear-gradient(-45deg, lightpink, black)', text: 'pink', glow: 'lightpink' },
+            red: { background: 'linear-gradient(-45deg, black, #330000, #660000)', text: 'red', glow: 'red' },
+            green: { background: 'linear-gradient(-45deg, black, #003300, #006600)', text: 'green', glow: 'green' },
+            original: { background: 'linear-gradient(-45deg, black, #330000, #660000)', text: 'red', glow: 'red' }
         };
 
         function setTheme(theme) {
             const selectedTheme = themes[theme];
             document.body.style.background = selectedTheme.background;
+            document.body.style.animation = "gradientAnimation 15s ease infinite";
             document.querySelectorAll('.nav-button').forEach(btn => {
                 btn.style.color = selectedTheme.text;
             });
             document.getElementById('subtitle').querySelector('.red').style.color = selectedTheme.text;
             document.getElementById('header-title').querySelector('.red').style.color = selectedTheme.text;
+            document.getElementById('customSearchBar').style.boxShadow = `0px 0px 20px 4px ${selectedTheme.glow}`;
         }
     </script>
 </body>
