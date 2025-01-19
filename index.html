@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +10,6 @@
     <link rel="manifest" href="/manifest.json">
 
     <style>
-        /* Prevent horizontal and vertical scrolling */
         html, body {
             margin: 0;
             padding: 0;
@@ -58,7 +56,6 @@
         h1 {
             font-size: 45px;
             margin: 0;
-            display: inline-block;
             transition: transform 0.3s ease;
             cursor: pointer;
         }
@@ -150,12 +147,40 @@
             transform: scale(1.1);
             box-shadow: 0px 0px 20px 4px red;
         }
+
+        .theme-dots {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .theme-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 10px 2px white;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .theme-dot:hover {
+            transform: scale(1.5);
+            box-shadow: 0 0 15px 5px currentColor;
+        }
+
+        .theme-white { background-color: white; color: black; }
+        .theme-pink { background-color: pink; color: pink; }
+        .theme-red { background-color: red; color: red; }
+        .theme-green { background-color: green; color: green; }
+        .theme-original { background-color: black; color: red; }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Roboto:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <h1 onclick="window.location.href='https://unblockzone.github.io/'">
+        <h1 id="header-title" onclick="window.location.href='https://unblockzone.github.io/'">
             <span class="white">UNBLOCK</span><span class="red">ZONE</span>
         </h1>
         <div class="nav-buttons">
@@ -169,27 +194,41 @@
     </header>
 
     <div class="subtitle-container">
-        <div class="subtitle">
+        <div class="subtitle" id="subtitle">
             <span class="white">UNBLOCK</span>
             <span class="red">ZONE</span>
         </div>
         <input type="text" id="customSearchBar" class="custom-search-bar" placeholder="Search...">
     </div>
 
-    <script>
-        // Redirect to search URL
-        const searchBar = document.getElementById('customSearchBar');
-        searchBar.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                const query = encodeURIComponent(searchBar.value);
-                window.location.href = `https://unblockzone.github.io/google/?q=${query}`;
-            }
-        });
+    <div class="theme-dots">
+        <div class="theme-dot theme-white" onclick="setTheme('white')"></div>
+        <div class="theme-dot theme-pink" onclick="setTheme('pink')"></div>
+        <div class="theme-dot theme-red" onclick="setTheme('red')"></div>
+        <div class="theme-dot theme-green" onclick="setTheme('green')"></div>
+        <div class="theme-dot theme-original" onclick="setTheme('original')"></div>
+    </div>
 
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js')
-                .then(() => console.log('Service Worker registered successfully.'))
-                .catch(err => console.log('Service Worker registration failed:', err));
+    <script>
+        const themes = {
+            white: { background: 'linear-gradient(-45deg, white, lightgray)', glow: 'white' },
+            pink: { background: 'linear-gradient(-45deg, pink, lightpink)', glow: 'pink' },
+            red: { background: 'linear-gradient(-45deg, black, #330000, #660000)', glow: 'red' },
+            green: { background: 'linear-gradient(-45deg, black, #003300, #006600)', glow: 'green' },
+            original: { background: 'linear-gradient(-45deg, black, #330000, #660000)', glow: 'red' }
+        };
+
+        function setTheme(theme) {
+            const selectedTheme = themes[theme];
+            document.body.style.background = selectedTheme.background;
+            document.querySelectorAll('.nav-button').forEach(btn => {
+                btn.style.boxShadow = `0px 0px 15px 4px ${selectedTheme.glow}`;
+            });
+            document.querySelectorAll('.theme-dot').forEach(dot => {
+                dot.style.boxShadow = `0px 0px 10px 2px ${selectedTheme.glow}`;
+            });
+            document.getElementById('subtitle').querySelector('.red').style.color = selectedTheme.glow;
+            document.getElementById('header-title').querySelector('.red').style.color = selectedTheme.glow;
         }
     </script>
 </body>
