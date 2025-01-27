@@ -211,7 +211,9 @@
             <span class="white">UNBLOCK</span>
             <span class="red">ZONE</span>
         </div>
-        <input type="text" id="customSearchBar" class="custom-search-bar" placeholder="Search...">
+        <form id="searchForm" action="https://unblockzone.github.io/google-search/" method="get">
+            <input type="text" id="customSearchBar" class="custom-search-bar" name="q" placeholder="Search...">
+        </form>
     </div>
 
     <div class="theme-dots">
@@ -242,6 +244,13 @@
             document.getElementById('header-title').querySelector('.red').style.color = selectedTheme.text;
             document.getElementById('customSearchBar').style.boxShadow = `0px 0px 20px 4px ${selectedTheme.glow}`;
         }
+
+        // Submit search form on Enter key
+        document.getElementById('customSearchBar').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                document.getElementById('searchForm').submit();
+            }
+        });
     </script>
 </body>
 </html>
