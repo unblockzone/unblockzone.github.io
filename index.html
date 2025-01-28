@@ -21,7 +21,7 @@
         }
 
         body {
-            background: linear-gradient(-45deg, black, #330000, #660000, black);
+            background: linear-gradient(-45deg, lightblue, black);
             background-size: 300% 300%;
             animation: gradientAnimation 15s ease infinite;
             font-family: 'Bowlby One', sans-serif;
@@ -42,6 +42,30 @@
             100% {
                 background-position: 0% 50%;
             }
+        }
+
+        @keyframes heartAnimation {
+            0% {
+                transform: translateY(100vh) scale(0.5);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: lightblue;
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: heartAnimation 6s infinite ease-in-out;
         }
 
         header {
@@ -68,7 +92,7 @@
         }
 
         .red {
-            color: red;
+            color: lightblue;
         }
 
         .white {
@@ -94,7 +118,7 @@
 
         .nav-button:hover {
             transform: scale(1.1);
-            box-shadow: 0px 0px 15px 4px white;
+            box-shadow: 0px 0px 15px 4px lightblue;
             color: inherit;
         }
 
@@ -117,7 +141,7 @@
         }
 
         .subtitle .red {
-            color: white;
+            color: lightblue;
             font-size: 100px;
             display: block;
         }
@@ -139,6 +163,7 @@
             background-color: #555;
             color: white;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0px 0px 20px 4px lightblue;
         }
 
         .custom-search-bar:focus {
@@ -194,18 +219,6 @@
         </div>
     </header>
 
-    <!-- Third Google AdSense Ad -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8030500715862542" crossorigin="anonymous"></script>
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-8030500715862542"
-         data-ad-slot="7063923218"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-
     <div class="subtitle-container">
         <div class="subtitle" id="subtitle">
             <span class="white">UNBLOCK</span>
@@ -214,33 +227,23 @@
         <input type="text" id="customSearchBar" class="custom-search-bar" placeholder="Search..." onkeypress="handleSearch(event)">
     </div>
 
-    <div class="theme-dots">
-        <div class="theme-dot theme-pink" onclick="setTheme('pink')"></div>
-        <div class="theme-dot theme-blue" onclick="setTheme('blue')"></div>
-        <div class="theme-dot theme-red" onclick="setTheme('red')"></div>
-        <div class="theme-dot theme-green" onclick="setTheme('green')"></div>
-        <div class="theme-dot theme-black" onclick="setTheme('black')"></div>
-    </div>
+    <!-- Valentine Heart Animation -->
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 6000);
+        }
+
+        setInterval(createHeart, 300);
+    </script>
 
     <script>
-        const themes = {
-            pink: { background: 'linear-gradient(-45deg, pink, black)', text: 'pink', glow: 'pink' },
-            blue: { background: 'linear-gradient(-45deg, darkblue, black)', text: 'blue', glow: 'blue' },
-            red: { background: 'linear-gradient(-45deg, black, #330000, #660000)', text: 'red', glow: 'red' },
-            green: { background: 'linear-gradient(-45deg, black, #003300, #006600)', text: 'green', glow: 'green' },
-            black: { background: 'linear-gradient(-45deg, black, #222, #444)', text: 'white', glow: 'white' }
-        };
-
         function setTheme(theme) {
-            const selectedTheme = themes[theme];
-            document.body.style.background = selectedTheme.background;
-            document.body.style.animation = "gradientAnimation 15s ease infinite";
-            document.querySelectorAll('.nav-button').forEach(btn => {
-                btn.style.color = selectedTheme.text;
-            });
-            document.getElementById('subtitle').querySelector('.red').style.color = selectedTheme.text;
-            document.getElementById('header-title').querySelector('.red').style.color = selectedTheme.text;
-            document.getElementById('customSearchBar').style.boxShadow = `0px 0px 20px 4px ${selectedTheme.glow}`;
+            // Theme function logic
         }
 
         function handleSearch(event) {
