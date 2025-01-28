@@ -44,30 +44,6 @@
             }
         }
 
-        @keyframes heartAnimation {
-            0% {
-                transform: translateY(100vh) scale(0.5);
-                opacity: 0;
-            }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-10vh) scale(1.2);
-                opacity: 0;
-            }
-        }
-
-        .heart {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background-color: lightblue;
-            border-radius: 50%;
-            opacity: 0.6;
-            animation: heartAnimation 6s infinite ease-in-out;
-        }
-
         header {
             background-color: #333;
             display: flex;
@@ -163,7 +139,7 @@
             background-color: #555;
             color: white;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0px 0px 20px 4px lightblue;
+            box-shadow: 0 0 20px 4px lightblue;
         }
 
         .custom-search-bar:focus {
@@ -183,24 +159,53 @@
         }
 
         .theme-dot {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            background-color: transparent;
+            clip-path: path('M10 30C10 20 0 20 0 10C0 -5 20 -5 20 10C20 20 10 20 10 30Z');
             cursor: pointer;
-            box-shadow: 0 0 10px 2px white;
+            transition: transform 0.3s ease, box=shadow.
+``
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 0 10px 2px white;
         }
 
         .theme-dot:hover {
             transform: scale(1.5);
-            box-shadow: 0 0 15px 5px white;
+            box-shadow: 0 0 15px 5px lightblue;
         }
 
         .theme-pink { background-color: pink; }
-        .theme-blue { background-color: blue; }
+        .theme-blue { background-color: lightblue; }
         .theme-red { background-color: red; }
         .theme-green { background-color: green; }
         .theme-black { background-color: black; }
+
+        /* Floating hearts */
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: pink;
+            clip-path: path('M10 30C10 20 0 20 0 10C0 -5 20 -5 20 10C20 20 10 20 10 30Z');
+            animation: floatUp 5s infinite ease-in-out;
+            opacity: 0.8;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateY(-50px) scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) scale(1);
+                opacity: 0;
+            }
+        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Roboto:wght@700&display=swap" rel="stylesheet">
 </head>
@@ -219,6 +224,18 @@
         </div>
     </header>
 
+    <!-- Third Google AdSense Ad -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8030500715862542" crossorigin="anonymous"></script>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-8030500715862542"
+         data-ad-slot="7063923218"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
     <div class="subtitle-container">
         <div class="subtitle" id="subtitle">
             <span class="white">UNBLOCK</span>
@@ -227,23 +244,36 @@
         <input type="text" id="customSearchBar" class="custom-search-bar" placeholder="Search..." onkeypress="handleSearch(event)">
     </div>
 
-    <!-- Valentine Heart Animation -->
-    <script>
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.className = 'heart';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 3 + 3 + 's';
-            document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 6000);
-        }
+    <div class="theme-dots">
+        <div class="theme-dot theme-pink" onclick="setTheme('pink')"></div>
+        <div class="theme-dot theme-blue" onclick="setTheme('blue')"></div>
+        <div class="theme-dot theme-red" onclick="setTheme('red')"></div>
+        <div class="theme-dot theme-green" onclick="setTheme('green')"></div>
+        <div class="theme-dot theme-black" onclick="setTheme('black')"></div>
+    </div>
 
-        setInterval(createHeart, 300);
-    </script>
+    <!-- Floating Valentine Hearts -->
+    <div id="hearts-container"></div>
 
     <script>
+        const themes = {
+            pink: { background: 'linear-gradient(-45deg, pink, black)', text: 'pink', glow: 'pink' },
+            blue: { background: 'linear-gradient(-45deg, lightblue, black)', text: 'lightblue', glow: 'lightblue' },
+            red: { background: 'linear-gradient(-45deg, black, #330000, #660000)', text: 'red', glow: 'red' },
+            green: { background: 'linear-gradient(-45deg, black, #003300, #006600)', text: 'green', glow: 'green' },
+            black: { background: 'linear-gradient(-45deg, black, #222, #444)', text: 'white', glow: 'white' }
+        };
+
         function setTheme(theme) {
-            // Theme function logic
+            const selectedTheme = themes[theme];
+            document.body.style.background = selectedTheme.background;
+            document.body.style.animation = "gradientAnimation 15s ease infinite";
+            document.querySelectorAll('.nav-button').forEach(btn => {
+                btn.style.color = selectedTheme.text;
+            });
+            document.getElementById('subtitle').querySelector('.red').style.color = selectedTheme.text;
+            document.getElementById('header-title').querySelector('.red').style.color = selectedTheme.text;
+            document.getElementById('customSearchBar').style.boxShadow = `0px 0px 20px 4px ${selectedTheme.glow}`;
         }
 
         function handleSearch(event) {
@@ -254,6 +284,29 @@
                 }
             }
         }
+
+        // Generate floating hearts
+        function generateHearts() {
+            const container = document.getElementById('hearts-container');
+            const heartCount = 50;
+
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                container.appendChild(heart);
+
+                // Remove heart after animation ends
+                heart.addEventListener('animationend', () => {
+                    heart.remove();
+                });
+            }
+        }
+
+        generateHearts();
+        setInterval(generateHearts, 5000); // Keep generating hearts periodically
     </script>
 </body>
 </html>
