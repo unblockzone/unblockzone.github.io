@@ -18,13 +18,13 @@
             padding: 0;
             height: 100%;
             overflow: hidden;
+            font-family: Arial, sans-serif;
         }
 
         body {
             background: rgba(35,35,35);
             background-size: 300% 300%;
             animation: gradientAnimation 15s ease infinite;
-            font-family: 'Bowlby One', sans-serif;
             color: white;
             display: flex;
             flex-direction: column;
@@ -33,15 +33,9 @@
         }
 
         @keyframes gradientAnimation {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         header {
@@ -67,13 +61,8 @@
             transform: scale(1.1);
         }
 
-        .red {
-            color: lightblue;
-        }
-
-        .white {
-            color: white;
-        }
+        .red { color: lightblue; }
+        .white { color: white; }
 
         .nav-buttons {
             display: flex;
@@ -89,13 +78,12 @@
             font-size: 18px;
             text-decoration: none;
             text-align: center;
-            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .nav-button:hover {
             transform: scale(1.1);
             box-shadow: 0px 0px 15px 4px lightblue;
-            color: inherit;
         }
 
         .subtitle-container {
@@ -113,7 +101,7 @@
         .subtitle {
             font-size: 70px;
             display: inline-block;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             transition: transform 0.3s ease;
         }
 
@@ -123,13 +111,9 @@
             display: block;
         }
 
-        .subtitle .white {
-            color: white;
-        }
+        .subtitle .white { color: white; }
 
-        .subtitle:hover {
-            transform: scale(1.1);
-        }
+        .subtitle:hover { transform: scale(1.1); }
 
         .custom-search-bar {
             font-size: 18px;
@@ -144,13 +128,8 @@
             z-index: 1;
         }
 
-        .custom-search-bar:focus {
-            outline: none;
-        }
-
-        .custom-search-bar:hover {
-            transform: scale(1.1);
-        }
+        .custom-search-bar:focus { outline: none; }
+        .custom-search-bar:hover { transform: scale(1.1); }
 
         .coolBlobIdk {
             position: absolute;
@@ -166,30 +145,13 @@
             z-index: -1;
         }
 
-        .coolBlobIdk::before {
-            content: '';
-            position: absolute;
-            top: 10%;
-            left: 30%;
-            width: 300px;
-            height: 300px;
-            background: linear-gradient(135deg, rgba(200, 0, 255, 0.5), rgba(150, 0, 150, 0.4), rgba(0, 0, 255, 0.3));
-            border-radius: 50%;
-            filter: blur(100px);
-            z-index: -1;
-        }
-
-        /* Fading text styles */
         .fade-text {
             font-family: Arial, sans-serif;
             font-size: 18px;
             color: white;
-            position: absolute;
-            top: 70px;
-            width: 100%;
-            text-align: center;
             opacity: 0;
             animation: fadeInOut 5s infinite, waveMotion 2s ease-in-out infinite alternate;
+            margin-top: 10px;
         }
 
         @keyframes fadeInOut {
@@ -204,7 +166,6 @@
             100% { transform: translateY(5px); }
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Roboto:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="coolBlobIdk"></div>
@@ -222,16 +183,34 @@
         </div>
     </header>
 
+    <!-- Fading text under header -->
+    <div id="fadeText1" class="fade-text"></div>
+
     <div class="subtitle-container">
         <div class="subtitle" id="subtitle">
             <span class="white">UNBLOCK</span>
             <span class="red">ZONE</span>
         </div>
+
+        <!-- Fading text under "UNBLOCKZONE" -->
+        <div id="fadeText2" class="fade-text"></div>
+
         <input type="text" id="customSearchBar" class="custom-search-bar" placeholder="Search..." onkeypress="handleSearch(event)">
-        <div id="fadeText" class="fade-text">where are we...</div>
+
+        <!-- Fading text under search bar -->
+        <div id="fadeText3" class="fade-text"></div>
     </div>
 
     <script>
+        function handleSearch(event) {
+            if (event.key === 'Enter') {
+                const query = document.getElementById('customSearchBar').value.trim();
+                if (query) {
+                    window.location.href = `https://unblockzone.github.io/google-search/?q=${encodeURIComponent(query)}`;
+                }
+            }
+        }
+
         const phrases = [
             "where are we...",
             "made by braybray...",
@@ -241,10 +220,11 @@
         ];
 
         let currentPhraseIndex = 0;
-        const fadeTextElement = document.getElementById("fadeText");
-
         function changeText() {
-            fadeTextElement.textContent = phrases[currentPhraseIndex];
+            document.getElementById("fadeText1").textContent = phrases[currentPhraseIndex];
+            document.getElementById("fadeText2").textContent = phrases[currentPhraseIndex];
+            document.getElementById("fadeText3").textContent = phrases[currentPhraseIndex];
+
             currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
         }
 
