@@ -107,7 +107,7 @@
             width: 100%;
             margin-top: 20px;
             position: relative;
-            z-index: 1; /* Ensures it stays above the background */
+            z-index: 1;
         }
 
         .subtitle {
@@ -141,7 +141,7 @@
             color: white;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             box-shadow: 0px 0px 20px 4px lightblue;
-            z-index: 1; /* Keeps it above the background effect */
+            z-index: 1;
         }
 
         .custom-search-bar:focus {
@@ -163,7 +163,7 @@
             border-radius: 50%;
             filter: blur(100px);
             box-shadow: 0 0 120px rgba(255, 0, 255, 0.5);
-            z-index: -1; /* Ensures it's behind the main content */
+            z-index: -1;
         }
 
         .coolBlobIdk::before {
@@ -176,7 +176,32 @@
             background: linear-gradient(135deg, rgba(200, 0, 255, 0.5), rgba(150, 0, 150, 0.4), rgba(0, 0, 255, 0.3));
             border-radius: 50%;
             filter: blur(100px);
-            z-index: -1; /* Keeps it behind other content */
+            z-index: -1;
+        }
+
+        /* Fading text styles */
+        .fade-text {
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+            color: white;
+            position: absolute;
+            top: 70px;
+            width: 100%;
+            text-align: center;
+            opacity: 0;
+            animation: fadeInOut 5s infinite, waveMotion 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        @keyframes waveMotion {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(5px); }
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Roboto:wght@700&display=swap" rel="stylesheet">
@@ -203,17 +228,27 @@
             <span class="red">ZONE</span>
         </div>
         <input type="text" id="customSearchBar" class="custom-search-bar" placeholder="Search..." onkeypress="handleSearch(event)">
+        <div id="fadeText" class="fade-text">where are we...</div>
     </div>
 
     <script>
-        function handleSearch(event) {
-            if (event.key === 'Enter') {
-                const query = document.getElementById('customSearchBar').value.trim();
-                if (query) {
-                    window.location.href = `https://unblockzone.github.io/google-search/?q=${encodeURIComponent(query)}`;
-                }
-            }
+        const phrases = [
+            "where are we...",
+            "made by braybray...",
+            "victor sandytoes...",
+            "skibidi toilet...",
+            "this is cool..."
+        ];
+
+        let currentPhraseIndex = 0;
+        const fadeTextElement = document.getElementById("fadeText");
+
+        function changeText() {
+            fadeTextElement.textContent = phrases[currentPhraseIndex];
+            currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
         }
+
+        setInterval(changeText, 5000);
     </script>
 </body>
 </html>
