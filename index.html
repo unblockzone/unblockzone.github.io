@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,30 +42,6 @@
             100% {
                 background-position: 0% 50%;
             }
-        }
-
-        @keyframes heartAnimation {
-            0% {
-                transform: translateY(100vh) scale(0.5);
-                opacity: 0;
-            }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-10vh) scale(1.2);
-                opacity: 0;
-            }
-        }
-
-        .heart {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background-color: lightblue;
-            border-radius: 50%;
-            opacity: 0.6;
-            animation: heartAnimation 6s infinite ease-in-out;
         }
 
         header {
@@ -132,6 +107,7 @@
             width: 100%;
             margin-top: 20px;
             position: relative;
+            z-index: 1; /* Ensures it stays above the background */
         }
 
         .subtitle {
@@ -165,6 +141,7 @@
             color: white;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             box-shadow: 0px 0px 20px 4px lightblue;
+            z-index: 1; /* Keeps it above the background effect */
         }
 
         .custom-search-bar:focus {
@@ -175,59 +152,32 @@
             transform: scale(1.1);
         }
 
-        .theme-dots {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            display: flex;
-            gap: 10px;
-        }
-
-        .theme-dot {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 0 10px 2px white;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .theme-dot:hover {
-            transform: scale(1.5);
-            box-shadow: 0 0 15px 5px white;
-        }
-
-        .theme-pink { background-color: pink; }
-        .theme-blue { background-color: blue; }
-        .theme-red { background-color: red; }
-        .theme-green { background-color: green; }
-        .theme-black { background-color: black; }
-        
         .coolBlobIdk {
-    position: absolute;
-    bottom: -30%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 600px;
-    height: 400px;
-    background: linear-gradient(135deg, rgba(128, 0, 128, 0.6), rgba(255, 0, 255, 0.5), rgba(100, 0, 255, 0.6), rgba(0, 255, 255, 0.4), rgba(200, 0, 200, 0.6));
-    border-radius: 50%;
-    filter: blur(100px);
-    box-shadow: 0 0 120px rgba(255, 0, 255, 0.5);
-}
+            position: absolute;
+            bottom: -30%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 400px;
+            background: linear-gradient(135deg, rgba(128, 0, 128, 0.6), rgba(255, 0, 255, 0.5), rgba(100, 0, 255, 0.6), rgba(0, 255, 255, 0.4), rgba(200, 0, 200, 0.6));
+            border-radius: 50%;
+            filter: blur(100px);
+            box-shadow: 0 0 120px rgba(255, 0, 255, 0.5);
+            z-index: -1; /* Ensures it's behind the main content */
+        }
 
-.coolBlobIdk::before {
-    content: '';
-    position: absolute;
-    top: 10%;
-    left: 30%;
-    width: 300px;
-    height: 300px;
-    background: linear-gradient(135deg, rgba(200, 0, 255, 0.5), rgba(150, 0, 150, 0.4), rgba(0, 0, 255, 0.3));
-    border-radius: 50%;
-    filter: blur(100px);
-    z-index: -1;
-}
+        .coolBlobIdk::before {
+            content: '';
+            position: absolute;
+            top: 10%;
+            left: 30%;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, rgba(200, 0, 255, 0.5), rgba(150, 0, 150, 0.4), rgba(0, 0, 255, 0.3));
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1; /* Keeps it behind other content */
+        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Roboto:wght@700&display=swap" rel="stylesheet">
 </head>
@@ -255,25 +205,7 @@
         <input type="text" id="customSearchBar" class="custom-search-bar" placeholder="Search..." onkeypress="handleSearch(event)">
     </div>
 
-    <!-- Valentine Heart Animation -->
     <script>
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.className = 'heart';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 3 + 3 + 's';
-            document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 6000);
-        }
-
-        setInterval(createHeart, 300);
-    </script>
-
-    <script>
-        function setTheme(theme) {
-            // Theme function logic
-        }
-
         function handleSearch(event) {
             if (event.key === 'Enter') {
                 const query = document.getElementById('customSearchBar').value.trim();
