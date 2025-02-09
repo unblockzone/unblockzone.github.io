@@ -1,0 +1,273 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+
+    <!-- Temporary Favicon -->
+    <link rel="icon" href="https://img.icons8.com/m_outlined/200/FFFFFF/document.png" type="image/x-icon">
+
+    <style>
+        /* Prevent scrolling */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            background: linear-gradient(-45deg, black, lightblue, #1a1a1a, black); /* Light blue and black gradient */
+            background-size: 300% 300%;
+            animation: gradientAnimation 15s ease infinite;
+            font-family: 'Bowlby One', sans-serif;
+            color: white; /* Text color adjusted for contrast on black background */
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            position: relative;
+            align-items: center;
+            justify-content: center;
+            height: 100vh; /* Center the content vertically */
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Floating Red Dots Animation */
+        .dot {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(0, 191, 255, 0.8); /* Light blue Glow */
+            animation: floatUp 5s ease-in-out infinite, glow 1.5s alternate infinite, fadeIn 1s forwards;
+            z-index: -1; /* Ensures dots are behind the contact box */
+        }
+
+        /* Different Sizes and Animations for Dots */
+        .dot:nth-child(1) { width: 8px; height: 8px; animation-delay: 0s; top: 100%; left: 10%; }
+        .dot:nth-child(2) { width: 10px; height: 10px; animation-delay: 0.2s; top: 100%; left: 15%; }
+        .dot:nth-child(3) { width: 15px; height: 15px; animation-delay: 0.4s; top: 100%; left: 50%; }
+        .dot:nth-child(4) { width: 18px; height: 18px; animation-delay: 0.6s; top: 100%; left: 70%; }
+        .dot:nth-child(5) { width: 20px; height: 20px; animation-delay: 0.8s; top: 100%; left: 80%; }
+        .dot:nth-child(6) { width: 7px; height: 7px; animation-delay: 1s; top: 100%; left: 20%; }
+        .dot:nth-child(7) { width: 12px; height: 12px; animation-delay: 1.2s; top: 100%; left: 25%; }
+        .dot:nth-child(8) { width: 14px; height: 14px; animation-delay: 1.4s; top: 100%; left: 40%; }
+        .dot:nth-child(9) { width: 25px; height: 25px; animation-delay: 1.6s; top: 100%; left: 60%; }
+        .dot:nth-child(10) { width: 10px; height: 10px; animation-delay: 1.8s; top: 100%; left: 80%; }
+        .dot:nth-child(11) { width: 16px; height: 16px; animation-delay: 2s; top: 100%; left: 85%; }
+        .dot:nth-child(12) { width: 12px; height: 12px; animation-delay: 2.2s; top: 100%; left: 15%; }
+        .dot:nth-child(13) { width: 22px; height: 22px; animation-delay: 2.4s; top: 100%; left: 65%; }
+        .dot:nth-child(14) { width: 8px; height: 8px; animation-delay: 2.6s; top: 100%; left: 30%; }
+        .dot:nth-child(15) { width: 18px; height: 18px; animation-delay: 2.8s; top: 100%; left: 55%; }
+        .dot:nth-child(16) { width: 24px; height: 24px; animation-delay: 3s; top: 100%; left: 10%; }
+        .dot:nth-child(17) { width: 20px; height: 20px; animation-delay: 3.2s; top: 100%; left: 50%; }
+        .dot:nth-child(18) { width: 16px; height: 16px; animation-delay: 3.4s; top: 100%; left: 30%; }
+        .dot:nth-child(19) { width: 14px; height: 14px; animation-delay: 3.6s; top: 100%; left: 50%; }
+        .dot:nth-child(20) { width: 28px; height: 28px; animation-delay: 3.8s; top: 100%; left: 75%; }
+
+        /* Keyframes for dot floating upwards */
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-100vh); /* Moves the dot upwards */
+            }
+        }
+
+        /* Keyframes for glowing effect */
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 5px rgba(0, 191, 255, 0.8), 0 0 10px rgba(0, 191, 255, 0.6);
+            }
+            100% {
+                box-shadow: 0 0 15px rgba(0, 191, 255, 1), 0 0 30px rgba(0, 191, 255, 0.8);
+            }
+        }
+
+        /* Keyframes for fading in */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        header {
+            background-color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* Align items to the left */
+            padding: 10px 20px;
+            position: fixed; /* Changed to fixed position to keep the header at the top */
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 50px;
+            margin: 0;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        h1:hover {
+            transform: scale(1.1);
+        }
+
+        .red {
+            color: red; /* "ZONE" is no longer red */
+        }
+
+        .blue {
+            color: lightblue; /* Changed to light blue */
+        }
+
+        .white {
+            color: white;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .logo:hover {
+            transform: scale(1.2);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px; /* Reduced gap between buttons */
+            margin-left: 30px; /* Move buttons slightly to the right */
+        }
+
+        .nav-button {
+            background-color: black;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 20px;
+            font-size: 18px;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .nav-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 0px 15px 4px #00BFFF; /* Light blue glow effect */
+            color: #00BFFF; /* Light blue color on hover */
+        }
+
+        /* Contact Us Box */
+        .contact-us-box {
+            background-color: #333;
+            border-radius: 15px;
+            padding: 30px;
+            width: 300px;
+            text-align: center;
+            margin-top: 50px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            z-index: 5; /* Make sure it is above the floating dots */
+        }
+
+        .contact-us-box:hover {
+            transform: scale(1.05); /* Zoom effect on hover */
+            box-shadow: 0px 0px 20px 4px #00BFFF; /* Light blue glow effect */
+        }
+
+        .contact-us-box h2 {
+            color: white; /* Change to white */
+            font-size: 32px; /* Increase font size */
+            margin-bottom: 20px;
+        }
+
+        /* Buttons inside the contact box */
+        .contact-button {
+            background-color: black;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 15px;
+            font-size: 16px;
+            text-decoration: none;
+            display: block;
+            margin: 10px auto;
+            width: 80%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 0px 15px 4px #00BFFF; /* Light blue glow effect */
+            color: #00BFFF; /* Light blue color on hover */
+        }
+
+        .contact-button .blue {
+            color: lightblue;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Roboto:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Floating Dots -->
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+
+    <header>
+        <h1 onclick="window.location.href='https://unblockzone.github.io/'">
+            <span class="white">UNBLOCK</span><span class="blue">ZONE</span> <!-- "ZONE" is light blue now -->
+        </h1>
+        <div class="nav-buttons">
+            <a href="https://unblockzone.github.io/apps/" class="nav-button">APPS</a>
+            <a href="https://unblockzone.github.io/games/" class="nav-button">GAMES</a>
+            <a href="https://unblockzone.github.io/proxies/" class="nav-button">PROXIES</a>
+            <a href="https://unblockzone.github.io/exploits/" class="nav-button">EXPLOITS</a>
+            <a href="https://unblockzone.github.io/settings/" class="nav-button">SETTINGS</a>
+            <!-- Contact Button -->
+            <a href="https://unblockzone.github.io/contact/" class="nav-button">CONTACT</a>
+        </div>
+    </header>
+
+    <!-- Contact Us Box -->
+    <div class="contact-us-box">
+        <h2>CONTACT US</h2>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScAjuO9s-lwojOfEMwf-_jtQOjWCzkrkz4NKGPCIpbED3k2rA/viewform" class="contact-button">Contact Support</a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeHSK159TiaLNBMHMlFGLcA07-aj0Fl6i15WXFtlLss4SnG0Q/viewform" class="contact-button">Request a Game</a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSe4xupoMkYMtCjNIoQREBu6wzS8uOzPKkYQN5k_F0UVuhpUrg/viewform" class="contact-button">Request an App</a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdm2Nj36yP4rDCmuneq97hVRFOaXGC3-nkdhtbVLlZzMRRprA/viewform" class="contact-button">Request a Proxy</a>
+    </div>
+</body>
+</html>
