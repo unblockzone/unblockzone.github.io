@@ -1,0 +1,153 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proxies</title>
+
+    <link rel="icon" href="https://img.icons8.com/m_rounded/512/FFFFFF/support.png" type="image/x-icon">
+
+    <style>
+        /* Prevent scrolling */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        body {
+            background: radial-gradient(circle, lightblue, black, lightblue, black);
+            background-size: 300% 300%;
+            animation: gradientAnimation 15s infinite alternate;
+            font-family: 'Bowlby One', sans-serif;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            height: 100vh; /* Ensure full viewport height */
+            overflow: hidden; /* Hide overflow for the full height */
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header {
+            background-color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            width: 100%;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 50px;
+            margin: 0;
+            margin-left: 20px;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        h1:hover {
+            transform: scale(1.1);
+        }
+
+        .blue {
+            color: lightblue; /* Change "ZONE" to light blue */
+        }
+
+        .white {
+            color: white;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            margin-right: 20px;
+        }
+
+        .nav-button {
+            background-color: black;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 20px;
+            font-size: 18px;
+            text-decoration: none;
+            text-align: center;
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .nav-button:hover {
+            transform: scale(1.1);
+            background-color: black;
+            box-shadow: 0px 0px 15px 4px lightblue; /* Light blue glow on hover */
+            color: lightblue; /* Change text color to light blue on hover */
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 40px;
+            }
+
+            .nav-buttons {
+                display: block;
+                text-align: center;
+                margin-top: 10px;
+            }
+
+            .nav-button {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+
+        .iframe-container {
+            width: 100%;
+            height: calc(100vh - 60px); /* Subtract header height */
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+
+    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Roboto:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <a href="https://unblockzone.github.io">
+            <h1><span class="white">UNBLOCK</span><span class="blue">ZONE</span></h1>
+        </a>
+        <div class="nav-buttons">
+            <a href="https://unblockzone.github.io/apps" class="nav-button">APPS</a>
+            <a href="https://unblockzone.github.io/games" class="nav-button">GAMES</a>
+            <a href="https://unblockzone.github.io/proxies" class="nav-button">PROXIES</a>
+            <a href="https://unblockzone.github.io/exploits" class="nav-button">EXPLOITS</a>
+            <a href="https://unblockzone.github.io/settings/" class="nav-button">SETTINGS</a>
+            <a href="https://unblockzone.github.io/contact" class="nav-button">CONTACT</a>
+        </div>
+    </header>
+
+    <!-- Embed the Google Search page -->
+    <div class="iframe-container">
+        <iframe src="https://docs.google.com/document/d/1XFKCsJTpfmynnwAZQEeoB4Y2yoQxPY4UsNk0v135fww/edit?tab=t.0"></iframe>
+    </div>
+
+    <!-- Empty container -->
+    <div class="square-container">
+        <!-- No squares included -->
+    </div>
+</body>
+</html>
