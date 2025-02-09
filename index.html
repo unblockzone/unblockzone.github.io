@@ -1,14 +1,10 @@
 
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UnblockZone</title>
+    <title>UnblockZone V2</title>
 
     <!-- Favicon link -->
     <link rel="icon" href="https://img.icons8.com/ios_filled/512/FFFFFF/lock.png" type="image/x-icon">
@@ -47,30 +43,6 @@
             100% {
                 background-position: 0% 50%;
             }
-        }
-
-        @keyframes heartAnimation {
-            0% {
-                transform: translateY(100vh) scale(0.5);
-                opacity: 0;
-            }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-10vh) scale(1.2);
-                opacity: 0;
-            }
-        }
-
-        .heart {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background-color: lightblue;
-            border-radius: 50%;
-            opacity: 0.6;
-            animation: heartAnimation 6s infinite ease-in-out;
         }
 
         header {
@@ -232,13 +204,23 @@
     filter: blur(100px);
     z-index: -1;
 }
+
+#particles-js {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Roboto:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div id="particles-js"></div>
     <div class="coolBlobIdk"></div>
     <header>
-        <h1 id="header-title" onclick="window.location.href='https://unblockzone.github.io/'">
+        <h1 id="header-title" onclick="window.location.href='https://unblockzone.github.io/v2/'">
             <span class="white">UNBLOCK</span><span class="red">ZONE</span>
         </h1>
         <div class="nav-buttons">
@@ -259,20 +241,6 @@
         <input type="text" id="customSearchBar" class="custom-search-bar" placeholder="Search..." onkeypress="handleSearch(event)">
     </div>
 
-    <!-- Valentine Heart Animation -->
-    <script>
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.className = 'heart';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 3 + 3 + 's';
-            document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 6000);
-        }
-
-        setInterval(createHeart, 300);
-    </script>
-
     <script>
         function setTheme(theme) {
             // Theme function logic
@@ -287,5 +255,77 @@
             }
         }
     </script>
+    
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    particlesJS("particles-js", {
+      "particles": {
+        "number": {
+          "value": 100,
+          "density": {
+            "enable": true,
+            "value_area": 800
+          }
+        },
+        "color": {
+          "value": "#aaa"
+        },
+        "shape": {
+          "type": "circle",
+          "stroke": {
+            "width": 0,
+            "color": "#000000"
+          },
+          "polygon": {
+            "nb_sides": 5
+          },
+        },
+        "opacity": {
+          "value": 0.5,
+          "random": true,
+          "anim": {
+            "enable": true,
+            "speed": 1,
+            "opacity_min": 0.1,
+            "sync": false
+          }
+        },
+        "size": {
+          "value": 4,
+          "random": true,
+          "anim": {
+            "enable": true,
+            "speed": 4,
+            "size_min": 0.1,
+            "sync": false
+          }
+        },
+        "move": {
+          "enable": true,
+          "speed": 8, /* Faster wind-like movement */
+          "direction": "random",
+          "random": true,
+          "straight": false,
+          "out_mode": "out",
+          "bounce": false
+        }
+      },
+      "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+          "onhover": {
+            "enable": true,
+            "mode": "repulse"
+          },
+          "onclick": {
+            "enable": true,
+            "mode": "push"
+          },
+          "resize": true
+        }
+      },
+      "retina_detect": true
+    });
+  </script>
 </body>
 </html>
