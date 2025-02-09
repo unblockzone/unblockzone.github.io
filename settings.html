@@ -1,0 +1,248 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+
+    <!-- Temporary Favicon -->
+    <link rel="icon" href="https://img.icons8.com/m_rounded/512/FFFFFF/settings.png" type="image/x-icon">
+
+    <style>
+        /* Prevent scrolling */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        body {
+            background: linear-gradient(-45deg, #ADD8E6, #000011, #220000, black); /* Light blue and black gradient */
+            background-size: 300% 300%;
+            animation: gradientAnimation 15s ease infinite;
+            font-family: 'Bowlby One', sans-serif;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            position: relative;
+            overflow-x: hidden;
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        header {
+            background-color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 50px;
+            margin: 0;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        h1:hover {
+            transform: scale(1.1);
+        }
+
+        .red {
+            color: red;
+        }
+
+        .white {
+            color: white;
+        }
+
+        .blue {
+            color: #ADD8E6; /* Light blue color for "zone" */
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            margin-left: 30px;
+        }
+
+        .nav-button {
+            background-color: black;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 20px;
+            font-size: 18px;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .nav-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 0px 15px 4px #ADD8E6; /* Light blue glow */
+            color: #ADD8E6; /* Light blue text on hover */
+        }
+
+        .scroll-box {
+            width: 80%;
+            height: 70vh;
+            margin: 50px auto;
+            background-color: #333;
+            border-radius: 20px;
+            overflow-y: auto;
+            padding: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .scroll-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px 5px lightblue;
+        }
+
+        .scroll-box h2 {
+            font-size: 30px;
+            color: #ADD8E6; /* Light blue text */
+            text-shadow: 0 0 10px #ADD8E6; /* Light blue glow effect */
+            transition: text-shadow 0.3s ease; /* Smooth transition for glow effect */
+        }
+
+        .scroll-box h2:hover {
+            text-shadow: 0 0 20px #ADD8E6; /* Stronger light blue glow on hover */
+        }
+
+        .cloaker-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .cloaker-option {
+            background-color: #222;
+            border-radius: 10px;
+            box-shadow: 0 0 10px 2px #111;
+            padding: 10px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 150px;
+            cursor: pointer;
+        }
+
+        .cloaker-option:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px 5px #ADD8E6; /* Light blue glow on hover */
+            border: 2px solid #ADD8E6; /* Light blue border on hover */
+        }
+
+        .cloaker-option img {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .about-blank-button {
+            display: inline-block;
+            background-color: white;
+            color: black;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 30px;
+            text-align: center;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .about-blank-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px 5px lightblue;
+        }
+
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Roboto:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1 onclick="window.location.href='https://unblockzone.github.io/'">
+            <span class="white">UNBLOCK</span><span class="blue">ZONE</span>
+        </h1>
+        <div class="nav-buttons">
+            <a href="https://unblockzone.github.io/apps" class="nav-button">APPS</a>
+            <a href="https://unblockzone.github.io/games" class="nav-button">GAMES</a>
+            <a href="https://unblockzone.github.io/proxies" class="nav-button">PROXIES</a>
+            <a href="https://unblockzone.github.io/exploits" class="nav-button">EXPLOITS</a>
+            <a href="https://unblockzone.github.io/settings" class="nav-button">SETTINGS</a>
+            <a href="https://unblockzone.github.io/contact" class="nav-button">CONTACT</a>
+        </div>
+    </header>
+
+    <div class="scroll-box">
+        <h2>Tab Cloaker</h2>
+        <div class="cloaker-section">
+            <div class="cloaker-option" onclick="setTabCloak('Canvas', 'https://copyleaks.com/wp-content/uploads/2022/08/Canvas_Logo.webp')">
+                <img src="https://img.icons8.com/?size=512&id=oECahFP3ibID&format=png" alt="Canvas">
+                <span>Canvas</span>
+            </div>
+            <div class="cloaker-option" onclick="setTabCloak('My Drive - Google Drive', 'https://icons.iconarchive.com/icons/marcus-roberto/google-play/512/Google-Drive-icon.png')">
+                <img src="https://icons.iconarchive.com/icons/marcus-roberto/google-play/512/Google-Drive-icon.png" alt="Google Drive">
+                <span>Google Drive</span>
+            </div>
+            <div class="cloaker-option" onclick="setTabCloak('YouTube', 'https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" alt="YouTube">
+                <span>YouTube</span>
+            </div>
+            <div class="cloaker-option" onclick="setTabCloak('Outlook', 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Microsoft_Office_Outlook_%282018%E2%80%93present%29.svg/826px-Microsoft_Office_Outlook_%282018%E2%80%93present%29.svg.png')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Microsoft_Office_Outlook_%282018%E2%80%93present%29.svg/826px-Microsoft_Office_Outlook_%282018%E2%80%93present%29.svg.png" alt="Outlook">
+                <span>Outlook</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="background" id="background"></div>
+
+    <script>
+        function setTabCloak(title, icon) {
+            document.title = title;
+            const existingLink = document.querySelector('link[rel="icon"]');
+            if (existingLink) {
+                existingLink.href = icon;
+            } else {
+                const link = document.createElement('link');
+                link.rel = 'icon';
+                link.href = icon;
+                document.head.appendChild(link);
+            }
+        }
+    </script>
+</body>
+</html>
