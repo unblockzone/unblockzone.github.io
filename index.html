@@ -1,91 +1,334 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unblockzone</title>
+    <title>UnblockZone V2</title>
+
+    <!-- Favicon link -->
+    <link rel="icon" href="https://img.icons8.com/ios_filled/512/FFFFFF/lock.png" type="image/x-icon">
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- Google AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8030500715862542" crossorigin="anonymous"></script>
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-        
-        * {
+        html, body {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Roboto', sans-serif;
+            height: 100%;
+            overflow: hidden;
         }
 
         body {
-            background: url('unblockzone.png') no-repeat center center/cover;
+            background: rgba(35,35,35);
+            background-size: 300% 300%;
+            animation: gradientAnimation 15s ease infinite;
+            font-family: 'Bowlby One', sans-serif;
             color: white;
+            display: flex;
+            flex-direction: column;
             text-align: center;
-            height: 100vh;
+            position: relative;
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        header {
+            background-color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            gap: 15px;
+        }
+
+        h1 {
+            font-size: 45px;
+            margin: 0;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        h1:hover {
+            transform: scale(1.1);
+        }
+
+        .red {
+            color: lightblue;
+        }
+
+        .white {
+            color: white;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            margin-left: 20px;
+        }
+
+        .nav-button {
+            background-color: black;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 20px;
+            font-size: 18px;
+            text-decoration: none;
+            text-align: center;
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+        }
+
+        .nav-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 0px 15px 4px lightblue;
+            color: inherit;
+        }
+
+        .subtitle-container {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-        }
-
-        .browser-bar {
-            display: flex;
-            align-items: center;
-            background: white;
-            color: black;
-            padding: 10px;
-            border-radius: 10px;
-            width: 60%;
-            justify-content: space-between;
-        }
-
-        .browser-bar input {
-            flex-grow: 1;
-            margin: 0 10px;
-            padding: 5px;
-            border: none;
-            outline: none;
-            font-size: 16px;
-        }
-
-        .icons {
+            padding: 20px;
+            width: 100%;
             margin-top: 20px;
+            position: relative;
+        }
+
+        .subtitle {
+            font-size: 70px;
+            display: inline-block;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .subtitle .red {
+            color: lightblue;
+            font-size: 100px;
+            display: block;
+        }
+
+        .subtitle .white {
+            color: white;
+        }
+
+        .subtitle:hover {
+            transform: scale(1.1);
+        }
+
+        .custom-search-bar {
+            font-size: 18px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 30px;
+            width: 50%;
+            background-color: #555;
+            color: white;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0px 0px 20px 4px lightblue;
+        }
+
+        .custom-search-bar:focus {
+            outline: none;
+        }
+
+        .custom-search-bar:hover {
+            transform: scale(1.1);
+        }
+
+        .theme-dots {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
             display: flex;
-            justify-content: center;
-            gap: 20px;
+            gap: 10px;
         }
 
-        .icons img {
-            width: 50px;
-            height: 50px;
+        .theme-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 10px 2px white;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .footer {
-            position: absolute;
-            bottom: 10px;
-            font-size: 14px;
+        .theme-dot:hover {
+            transform: scale(1.5);
+            box-shadow: 0 0 15px 5px white;
         }
+
+        .theme-pink { background-color: pink; }
+        .theme-blue { background-color: blue; }
+        .theme-red { background-color: red; }
+        .theme-green { background-color: green; }
+        .theme-black { background-color: black; }
+        
+        .coolBlobIdk {
+    position: absolute;
+    bottom: -30%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 400px;
+    background: linear-gradient(135deg, rgba(128, 0, 128, 0.6), rgba(255, 0, 255, 0.5), rgba(100, 0, 255, 0.6), rgba(0, 255, 255, 0.4), rgba(200, 0, 200, 0.6));
+    border-radius: 50%;
+    filter: blur(100px);
+    box-shadow: 0 0 120px rgba(255, 0, 255, 0.5);
+}
+
+.coolBlobIdk::before {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 30%;
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(135deg, rgba(200, 0, 255, 0.5), rgba(150, 0, 150, 0.4), rgba(0, 0, 255, 0.3));
+    border-radius: 50%;
+    filter: blur(100px);
+    z-index: -1;
+}
+
+#particles-js {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Roboto:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div id="particles-js"></div>
+    <div class="coolBlobIdk"></div>
+    <header>
+        <h1 id="header-title" onclick="window.location.href='https://unblockzone.github.io/v2/'">
+            <span class="white">UNBLOCK</span><span class="red">ZONE</span>
+        </h1>
+        <div class="nav-buttons">
+            <a href="https://unblockzone.github.io/apps/" class="nav-button">APPS</a>
+            <a href="https://unblockzone.github.io/games/" class="nav-button">GAMES</a>
+            <a href="https://unblockzone.github.io/proxies/" class="nav-button">PROXIES</a>
+            <a href="https://unblockzone.github.io/exploits/" class="nav-button">EXPLOITS</a>
+            <a href="https://unblockzone.github.io/settings/" class="nav-button">SETTINGS</a>
+            <a href="https://unblockzone.github.io/contact/" class="nav-button">CONTACT</a>
+        </div>
+    </header>
 
-    <div class="browser-bar">
-        <button>←</button>
-        <button>→</button>
-        <button>⟳</button>
-        <input type="text" placeholder="search...">
-        <button>✖</button>
-        <button>➕</button>
+    <div class="subtitle-container">
+        <div class="subtitle" id="subtitle">
+            <span class="white">UNBLOCK</span>
+            <span class="red">ZONE</span>
+        </div>
+        <input type="text" id="customSearchBar" class="custom-search-bar" placeholder="Search..." onkeypress="handleSearch(event)">
     </div>
 
-    <h1>unblockzone</h1>
+    <script>
+        function setTheme(theme) {
+            // Theme function logic
+        }
 
-    <div class="icons">
-        <img src="https://cdn-icons-png.flaticon.com/512/732/732245.png" alt="Apps">
-        <img src="https://cdn-icons-png.flaticon.com/512/5356/5356896.png" alt="Games">
-        <img src="https://cdn-icons-png.flaticon.com/512/888/888864.png" alt="Web">
-        <img src="https://cdn-icons-png.flaticon.com/512/2871/2871415.png" alt="Files">
-        <img src="https://cdn-icons-png.flaticon.com/512/3524/3524635.png" alt="Settings">
-    </div>
-
-    <div class="footer">support | 2025 ub</div>
-
+        function handleSearch(event) {
+            if (event.key === 'Enter') {
+                const query = document.getElementById('customSearchBar').value.trim();
+                if (query) {
+                    window.location.href = `https://radicalub.pages.dev/${encodeURIComponent(query)}`;
+                }
+            }
+        }
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    particlesJS("particles-js", {
+      "particles": {
+        "number": {
+          "value": 100,
+          "density": {
+            "enable": true,
+            "value_area": 800
+          }
+        },
+        "color": {
+          "value": "#aaa"
+        },
+        "shape": {
+          "type": "circle",
+          "stroke": {
+            "width": 0,
+            "color": "#000000"
+          },
+          "polygon": {
+            "nb_sides": 5
+          },
+        },
+        "opacity": {
+          "value": 0.5,
+          "random": true,
+          "anim": {
+            "enable": true,
+            "speed": 1,
+            "opacity_min": 0.1,
+            "sync": false
+          }
+        },
+        "size": {
+          "value": 4,
+          "random": true,
+          "anim": {
+            "enable": true,
+            "speed": 4,
+            "size_min": 0.1,
+            "sync": false
+          }
+        },
+        "move": {
+          "enable": true,
+          "speed": 8, /* Faster wind-like movement */
+          "direction": "random",
+          "random": true,
+          "straight": false,
+          "out_mode": "out",
+          "bounce": false
+        }
+      },
+      "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+          "onhover": {
+            "enable": true,
+            "mode": "repulse"
+          },
+          "onclick": {
+            "enable": true,
+            "mode": "push"
+          },
+          "resize": true
+        }
+      },
+      "retina_detect": true
+    });
+  </script>
 </body>
 </html>
+
+
